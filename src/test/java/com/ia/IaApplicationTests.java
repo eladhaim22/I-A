@@ -1,4 +1,4 @@
-package com.ia.ia;
+package com.ia;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
