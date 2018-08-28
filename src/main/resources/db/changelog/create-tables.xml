@@ -61,6 +61,24 @@
             </column>
         </createTable>
 
+        <createTable tableName="products">
+            <column name="id" type="int" incrementBy="1">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sku"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reposition_point"  type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cantidad"  type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
         <addForeignKeyConstraint baseTableName="users_roles" baseColumnNames="user_id"
                                  constraintName="user_fk"
                                  referencedTableName="users" referencedColumnNames="id"/>
@@ -72,5 +90,7 @@
         <addForeignKeyConstraint baseTableName="users" baseColumnNames="person_id"
                                  constraintName="person_fk"
                                  referencedTableName="persons" referencedColumnNames="id"/>
+
+
     </changeSet>
 </databaseChangeLog>
