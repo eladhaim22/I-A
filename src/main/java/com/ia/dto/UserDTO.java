@@ -8,6 +8,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 public class UserDTO {
@@ -16,8 +18,9 @@ public class UserDTO {
     private String email;
     private String name;
     private String lastName;
-    private Set<String> roles;
+    private Set<String> roles = new HashSet<>();
     private PersonDTO person;
+    private boolean active;
 
     public Long getId() {
         return id;
@@ -61,5 +64,17 @@ public class UserDTO {
 
     public Set<String> getRoles() {
         return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
