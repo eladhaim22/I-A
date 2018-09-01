@@ -50,12 +50,14 @@ public class UserService {
         return users.stream().map(u -> userMapper.toDTO(u)).collect(Collectors.toList());
     }
 
-    public void addRolesToUser(Long id, List<String> roles) throws Exception {
+    public void addRolesToUser(Long id, Role role) throws Exception {
         User user = userRepository.getOne(id);
-        Set<Role> rolesSet = roleRepository.findByRoleIn(roles);
-        if(user != null){
-            user.getRoles().clear();
-            user.getRoles().addAll(rolesSet);
+        if(user != null) {
+            if (user.getRoles().contains(role)) {
+                user.getRoles().remove(role);
+            } else {
+                user.getRoles().add(role);
+            }
             userRepository.saveAndFlush(user);
         }
         else {

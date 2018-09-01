@@ -11,10 +11,11 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>Active</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Activo</th>
+                        <th style="width:25%">Roles</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,11 @@
                         <td>
                             <input type="checkbox" th:checked="${user.active}"/>
                         </td>
+                        <td>
+                        <select th:id="'role-select-' + ${user.id}" multiple="multiple">
+                            <option th:id="${user.id} + '-' + ${role.id}" th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${user.getRoles().contains(role.id)}"/>
+                        </select>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -35,6 +41,37 @@
 </div>
 <footer th:replace="partial/footer.html"/>
 <!-- Placed at the end of the document so the pages load faster ============================================= -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var users = /*[[${users}]]*/ 'default';
+    console.log(users);
+    /*]]>*/
+</script>
+
 <scripts th:replace="partial/scripts.html"/>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.each(users,function(index,value){
+            $('#role-select-' + value.id).multiselect({
+                onChange: function(element, checked) {
+                    var userId = element[0].id.split('-')[0];
+                    var roleId = element[0].id.split('-')[1];
+                    $.ajax({
+                        type: "POST",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        url: `/admin/user/${userId}/role`,
+                        data: roleId,
+                        error:function(error){
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+        })
+    });
+</script>
+
 </body>
 </html>

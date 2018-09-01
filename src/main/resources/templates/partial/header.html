@@ -40,7 +40,10 @@
                     <li class=""><a href="normal.html">Delivery</a></li>
                     <li class=""><a href="contact.html">Contact</a></li>
                     <li sec:authorize="hasRole('ADMIN')"  class="">
-                        <a href="/admin">Admin</a>
+                        <a href="/admin/users">Usuarios</a>
+                    </li>
+                    <li sec:authorize="hasRole('ADMIN')"  class="">
+                        <a href="/admin/products">Productos</a>
                     </li>
                     <li sec:authorize="!isAuthenticated()"  class="">
                         <a href="/login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>

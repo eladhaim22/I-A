@@ -28,7 +28,7 @@ public class UserMapper implements IMapper<User,UserDTO> {
         userDTO.setLastName(model.getLastName());
         userDTO.setName(model.getName());
         userDTO.setPerson(personMapper.toDTO(model.getPerson()));
-        userDTO.getRoles().addAll(model.getRoles().stream().map(r -> r.getRole()).collect(Collectors.toSet()));
+        userDTO.getRoles().addAll(model.getRoles().stream().map(r -> r.getId()).collect(Collectors.toSet()));
         userDTO.setActive(model.getActive());
         return userDTO;
     }

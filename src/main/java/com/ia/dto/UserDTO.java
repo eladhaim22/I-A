@@ -18,7 +18,7 @@ public class UserDTO {
     private String email;
     private String name;
     private String lastName;
-    private Set<String> roles = new HashSet<>();
+    private Set<Integer> roles = new HashSet<>();
     private PersonDTO person;
     private boolean active;
 
@@ -62,11 +62,11 @@ public class UserDTO {
         this.person = person;
     }
 
-    public Set<String> getRoles() {
+    public Set<Integer> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<String> roles) {
+    public void setRoles(Set<Integer> roles) {
         this.roles = roles;
     }
 
