@@ -79,17 +79,20 @@
 	<div class="row">
 		<div class="span4">
 			<div class="well">
-			<h5>CREATE YOUR ACCOUNT</h5><br/>
-			Enter your e-mail address to create an account.<br/><br/><br/>
-			<form action="register.html">
+			<h5>CREA TU CUENTA</h5><br/>
+			Ingrese tu email para crear una cuenta.<br/><br/><br/>
+			<form action="account/register">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail0">E-mail address</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail0" placeholder="Email">
-				</div>
+				  <input class="span3"  name="email" type="text" id="inputEmail0" placeholder="Email" required>
+					<div>
+						<span style="color:red;" th:if="${param.emailError}">El email ingresado ya esta registrado.</span>
+					</div>
+					</div>
 			  </div>
 			  <div class="controls">
-			  <button type="submit" class="btn block">Create Your Account</button>
+			  <button type="submit" class="btn block">Crea tu cuenta</button>
 			  </div>
 			</form>
 		</div>
@@ -97,23 +100,26 @@
 		<div class="span1"> &nbsp;</div>
 		<div class="span4">
 			<div class="well">
-			<h5>ALREADY REGISTERED ?</h5>
+			<h5>Usuario registrado ?</h5>
 			<form action="/login" method="post">
 			  <div class="control-group">
 				<label class="control-label" for="inputEmail1">Email</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" name="email" placeholder="Email">
+				  <input class="span3"  type="email" id="inputEmail1" name="email" placeholder="Email" required>
 				</div>
 			  </div>
 			  <div class="control-group">
-				<label class="control-label" for="inputPassword1">Password</label>
+				<label class="control-label" for="inputPassword1">Contraseña</label>
 				<div class="controls">
-				  <input type="password" class="span3"  id="inputPassword1" name="password" placeholder="Password">
+				  <input type="password" class="span3"  id="inputPassword1" name="password" placeholder="Contraseña" required>
+					<div>
+						<span style="color:red;" th:if="${param.error}">Usuario y contraseña incorrectos.</span>
+					</div>
 				</div>
 			  </div>
 			  <div class="control-group">
 				<div class="controls">
-				  <button type="submit" class="btn">Sign in</button> <a href="forgetpass.html">Forget password?</a>
+				  <button type="submit" class="btn">Sign in</button> <!--a href="forgetpass.html">Forget password?</a-->
 				</div>
 			  </div>
 			</form>

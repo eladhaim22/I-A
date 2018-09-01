@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partial/head.html"/>
 <body>
-$END$
+<header th:replace="partial/header.html"/>
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Active</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${users}" th:id="${user.id}">
+                        <td th:text="${user.id}"/>
+                        <td th:text="${user.name}"/>
+                        <td th:text="${user.lastName}"/>
+                        <td th:text="${user.email}"/>
+                        <td>
+                            <input type="checkbox" th:checked="${user.active}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="partial/footer.html"/>
+<!-- Placed at the end of the document so the pages load faster ============================================= -->
+<scripts th:replace="partial/scripts.html"/>
 </body>
 </html>
