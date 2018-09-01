@@ -8,7 +8,7 @@
 
     <changeSet id="01" author="elad">
         <createTable tableName="users">
-            <column name="id" type="int" incrementBy="1">
+            <column name="id" autoIncrement="true" type="int" incrementBy="1">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="email"  type="varchar(50)">
@@ -32,7 +32,7 @@
         </createTable>
 
         <createTable tableName="roles">
-            <column name="id" type="int" incrementBy="1">
+            <column name="id" autoIncrement="true" type="int" incrementBy="1">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="role" type="varchar(50)">
@@ -41,7 +41,7 @@
         </createTable>
 
         <createTable tableName="users_roles">
-            <column name="id" type="int" incrementBy="1">
+            <column name="id" type="int" autoIncrement="true" incrementBy="1">
                 <constraints nullable="false" unique="true"  primaryKey="true"/>
             </column>
             <column name="user_id" type="int">
@@ -53,7 +53,7 @@
         </createTable>
 
         <createTable tableName="persons">
-            <column name="id" type="int" incrementBy="1">
+            <column name="id" type="int" incrementBy="1" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="address"  type="varchar(255)">
@@ -62,7 +62,7 @@
         </createTable>
 
         <createTable tableName="products">
-            <column name="id" type="int" incrementBy="1">
+            <column name="id" type="int" incrementBy="1" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="name"  type="varchar(255)">

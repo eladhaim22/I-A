@@ -35,6 +35,16 @@ public class UserService {
         }
     }
 
+    public UserDTO getByMail(String email){
+        User user = userRepository.findByEmail(email).orElse(null);
+        if(user != null){
+            return userMapper.toDTO(user);
+        }
+        else {
+            return null;
+        }
+    }
+
     public List<UserDTO> getAll(){
         List<User> users = userRepository.findAll();
         return users.stream().map(u -> userMapper.toDTO(u)).collect(Collectors.toList());
@@ -51,5 +61,9 @@ public class UserService {
         else {
             throw new Exception("El usuario no existe");
         }
+    }
+
+    public void saveUser(User user){
+        userRepository.saveAndFlush(user);
     }
 }

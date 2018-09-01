@@ -1,13 +1,14 @@
 package com.ia.controller;
 
+import com.ia.dto.UserDTO;
 import com.ia.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,23 +16,24 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
 
-    final private Logger logger = LoggerFactory.getLogger(AdminController.class);
+    final private static Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    private ResponseEntity<?> getAll(){
+    @GetMapping("")
+    private String getAll(Model model){
         try{
             logger.info("get all users");
-            return ResponseEntity.ok(userService.getAll());
+            List<UserDTO> users = userService.getAll();
+            model.addAttribute("users",users);
+            return "admin/users.html";
         }
         catch (Exception e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return "";
         }
     }
 

@@ -28,8 +28,8 @@ public class UserMapper implements IMapper<User,UserDTO> {
         userDTO.setLastName(model.getLastName());
         userDTO.setName(model.getName());
         userDTO.setPerson(personMapper.toDTO(model.getPerson()));
-        userDTO.getRoles().clear();
         userDTO.getRoles().addAll(model.getRoles().stream().map(r -> r.getRole()).collect(Collectors.toSet()));
+        userDTO.setActive(model.getActive());
         return userDTO;
     }
 
@@ -46,6 +46,7 @@ public class UserMapper implements IMapper<User,UserDTO> {
         user.setLastName(dto.getLastName());
         user.setName(dto.getName());
         user.setPerson(personMapper.toModel(dto.getPerson()));
+        user.setActive(dto.isActive());
         return user;
     }
 }
