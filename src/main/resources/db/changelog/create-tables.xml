@@ -74,7 +74,7 @@
             <column name="reposition_point"  type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="cantidad"  type="int">
+            <column name="quantity"  type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>

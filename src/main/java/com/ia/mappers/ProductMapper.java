@@ -19,7 +19,7 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         productDTO.setSku(model.getSku());
         productDTO.setName(model.getName());
         productDTO.setRepositionPoint(model.getRepositionPoint());
-        productDTO.setCantidad(model.getCantidad());
+        productDTO.setQuantity(model.getQuantity());
         return productDTO;
     }
 
@@ -33,7 +33,7 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
             product = new Product();
         }
         product.setName(dto.getName());
-        product.setCantidad(dto.getCantidad());
+        product.setQuantity(dto.getQuantity());
         product.setRepositionPoint(dto.getRepositionPoint());
         product.setSku(dto.getSku());
         return product;

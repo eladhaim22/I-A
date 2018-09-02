@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partial/head.html"/>
+<body>
+<header th:replace="partial/header.html"/>
+<div id="mainBody">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>SKU</th>
+                        <th>Cant. Compra</th>
+                        <th>Cantidad</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}" th:id="'product-' + ${product.id}">
+                        <td th:text="${product.id}"/>
+                        <td th:text="${product.name}"/>
+                        <td th:text="${product.sku}"/>
+                        <td th:text="${product.repositionPoint}"/>
+                        <td th:text="${product.quantity}"/>
+                        <td>
+                            <a th:href="'/product/' + ${product.id}"><span class="btn btn-success">Modificar</span></a>
+                            <span th:id="'delete-' + ${product.id}" class="btn btn-danger">Borrar</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="partial/footer.html"/>
+<!-- Placed at the end of the document so the pages load faster ============================================= -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var products = /*[[${products}]]*/ 'default';
+    /*]]>*/
+</script>
+<scripts th:replace="partial/scripts.html"/>
+<script src="/js/product-list.js"></script>
+</body>
+</html>

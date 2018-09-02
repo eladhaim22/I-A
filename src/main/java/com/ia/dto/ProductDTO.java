@@ -1,13 +1,11 @@
 package com.ia.dto;
 
-import javax.persistence.Column;
-
 public class ProductDTO {
     private Integer id;
     private String name;
     private String sku;
     private int repositionPoint;
-    private int cantidad;
+    private int quantity;
 
     public Integer getId() {
         return id;
@@ -41,11 +39,11 @@ public class ProductDTO {
         this.repositionPoint = repositionPoint;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -20,8 +20,8 @@ public class Product {
     @Column(name="reposition_point")
     private int repositionPoint;
 
-    @Column(name="cantidad")
-    private int cantidad;
+    @Column(name="quantity")
+    private int quantity;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class Product {
         this.repositionPoint = repositionPoint;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
