@@ -35,7 +35,7 @@ $(document).ready(function() {
                     type: "DELETE",
                     dataType: 'json',
                     contentType: 'application/json',
-                    url: `/admin/product/${value.id}`,
+                    url: `/product/${value.id}`,
                     data: value.id,
                     success:function(){
                         $("#product-" + value.id).remove();

@@ -9,6 +9,7 @@ import com.ia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -35,6 +36,16 @@ public class UserService {
         }
     }
 
+    public User getUserById(Long id) throws Exception {
+        User user = userRepository.getOne(id);
+        if(user != null){
+            return user;
+        }
+        else {
+            throw new Exception("El usuario no existe");
+        }
+    }
+
     public UserDTO getByMail(String email){
         User user = userRepository.findByEmail(email).orElse(null);
         if(user != null){
@@ -50,14 +61,12 @@ public class UserService {
         return users.stream().map(u -> userMapper.toDTO(u)).collect(Collectors.toList());
     }
 
-    public void addRolesToUser(Long id, Role role) throws Exception {
+    public void addRolesToUser(Long id, Integer[] rolesId) throws Exception {
         User user = userRepository.getOne(id);
+        Set<Role> roles = roleRepository.findByIdIn(Arrays.stream(rolesId).collect(Collectors.toList()));
         if(user != null) {
-            if (user.getRoles().contains(role)) {
-                user.getRoles().remove(role);
-            } else {
-                user.getRoles().add(role);
-            }
+            user.getRoles().clear();
+            user.getRoles().addAll(roles);
             userRepository.saveAndFlush(user);
         }
         else {
@@ -66,6 +75,12 @@ public class UserService {
     }
 
     public void saveUser(User user){
+        userRepository.saveAndFlush(user);
+    }
+
+    public void toggleActive(Long userId,boolean active) {
+        User user = userRepository.getOne(userId);
+        user.setActive(active);
         userRepository.saveAndFlush(user);
     }
 }

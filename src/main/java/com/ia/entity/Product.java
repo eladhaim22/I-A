@@ -23,6 +23,12 @@ public class Product {
     @Column(name="quantity")
     private int quantity;
 
+    @Column(name="active")
+    private boolean active;
+
+    @Column(name="image_url")
+    private String imageUrl;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +67,21 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String url) {
+        this.imageUrl = url;
     }
 }

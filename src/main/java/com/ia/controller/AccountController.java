@@ -21,29 +21,25 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/login")
+    public String loginPage(){
+        return "account/login";
+    }
+
     @GetMapping("/register")
-    public String registerUser(User newUser,@RequestParam("email") String email,RedirectAttributes redirectAttributes,Model model){
-        if(email != "") {
-            UserDTO user = userService.getByMail(email);
-            if (user == null) {
-                newUser.setEmail(email);
-                model.addAttribute("newUser",newUser);
-                return "account/register";
-            }
-            else{
-                redirectAttributes.addAttribute("emailError",true);
-            }
-        }
-        return "redirect:/login";
+    public String registerUser(User newUser,Model model){
+        User user = new User();
+        model.addAttribute("user",user);
+        return "account/register";
     }
 
     @PostMapping("/register")
-    public String registerUser(@Valid @ModelAttribute("newUser") User newUser, BindingResult bindingResult){
+    public String registerUser(@Valid @ModelAttribute("user") User newUser, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "account/register";
         }
         userService.saveUser(newUser);
-      return null;
+      return "/account/registerSuccess";
     }
 
     @GetMapping("/register/success")

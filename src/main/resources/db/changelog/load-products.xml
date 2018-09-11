@@ -10,6 +10,7 @@
               file="db/data/products.csv"
               separator=";"
               tableName="products">
+        <column name="active" type="boolean"/>
     </loadData>
 </changeSet>
 

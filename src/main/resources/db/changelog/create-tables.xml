@@ -77,6 +77,12 @@
             <column name="quantity"  type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="active"  type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image_url"  type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
         </createTable>
 
         <addForeignKeyConstraint baseTableName="users_roles" baseColumnNames="user_id"

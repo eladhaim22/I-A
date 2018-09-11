@@ -8,14 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("admin/product")
+@RequestMapping("/product")
 public class ProductController {
 
     final private static Logger logger = LoggerFactory.getLogger(ProductController.class);
@@ -37,26 +40,37 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/{id}")
-    private ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+    @GetMapping({"/{id}",""})
+    private String getById(@PathVariable(value = "id",required = false) Integer id,Model model) {
         try {
             logger.info("get product with id {0}", id);
-            return ResponseEntity.ok(productService.getById(id));
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            ProductDTO product = null;
+            if (id == null) {
+                product = new ProductDTO();
+            } else {
+                product = productService.getById(id);
+            }
+            model.addAttribute("product",product);
+            return "products/product.html";
+        }
+        catch (Exception e) {
+                logger.error(e.getMessage());
+                return "";
         }
     }
 
     @PostMapping("")
-    private ResponseEntity<?> save(@RequestBody ProductDTO productDTO) {
+    private String save(@Valid @ModelAttribute("product") ProductDTO productDTO,BindingResult bindingResult) {
         try {
+                if(bindingResult.hasErrors()){
+                    return "products/product.html";
+                }
             logger.info("saving product");
             productService.save(productDTO);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return "redirect:product/list";
         } catch (Exception e) {
             logger.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw e;
         }
     }
 

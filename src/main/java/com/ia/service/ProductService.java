@@ -11,8 +11,21 @@ import com.ia.repository.ProductRepository;
 import com.ia.repository.RoleRepository;
 import com.ia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +37,12 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Value("${files.folder}")
+    private String filesFolder;
+
+    @Value("${images.folder}")
+    private String imagesFolder;
 
     public ProductDTO getById(Integer id) throws Exception {
         Product product = productRepository.getOne(id);
@@ -45,7 +64,16 @@ public class ProductService {
     }
 
     public void save(ProductDTO productDTO){
-        Product product = productMapper.toModel(productDTO);
-        productRepository.saveAndFlush(product);
+        try {
+            if(!productDTO.getFile().isEmpty()){
+                FileOutputStream output = new FileOutputStream(filesFolder + productDTO.getFile().getOriginalFilename());
+                output.write(productDTO.getFile().getBytes());
+                productDTO.setImageUrl(imagesFolder + productDTO.getFile().getOriginalFilename());
+            }
+            Product product = productMapper.toModel(productDTO);
+            productRepository.saveAndFlush(product);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

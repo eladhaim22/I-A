@@ -1,7 +1,9 @@
 package com.ia.entity;
 
+import com.ia.validators.Unique;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -10,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name ="users")
+@Unique(message = "*El email ya esta registrado.")
 public class User {
 
     @Id
@@ -44,7 +47,7 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "person_id")
-    private Person person;
+    private Person person = new Person();
 
     public Long getId() {
         return id;

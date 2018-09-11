@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partial/head.html"/>
+<body>
+    <div class="banner-top container-fluid" id="home">
+        <header th:replace="partial/header.html"/>
+        <div class="banner_inner">
+            <div class="services-breadcrumb">
+                <div class="inner_breadcrumb">
+
+                    <ul class="short">
+                        <li>
+                            <a href="/">Home</a>
+                            <i>|</i>
+                        </li>
+                        <li>
+                            <a href="/admin/user/list">Usuarios</a>
+                            <i>|</i>
+                        </li>
+                        <li>
+                            Crear/Modificar Usuario
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	<!--// header_top -->
+	<!-- top Products -->
+	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+		<div class="container">
+			<div class="inner_sec">
+				<div class="contact_grid_right">
+						<div class="row contact_right_grid">
+                            <div class="col-md-3 con-right"></div>
+							<div class="col-md-6 con-right">
+                                <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Crear/Modificar Usuario</h3>
+                                <form class="form-horizontal" action="/admin/user" method="post" th:object="${user}">
+                                    <div class="row">
+                                        <div class="col form-group">
+                                                <label>Nombre</label>
+                                                <input class="form-control" type="text" th:field="*{name}" placeholder="" required="true">
+                                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+                                        </div>
+                                        <div class="col form-group">
+                                            <label>Apellido</label>
+                                            <input class="form-control" type="text" th:field="*{lastName}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label>Email</label>
+                                            <input class="form-control" type="text" th:field="*{email}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+                                        </div>
+                                        <div class="col form-group">
+                                            <label>Contraseña</label>
+                                            <input class="form-control" type="password" th:field="*{password}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label>Dirección</label>
+                                            <input class="form-control" type="text" th:field="*{person.address}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('person.address')}" th:errors="*{person.address}">address Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <select class="selectpicker"  multiple data-live-search="true" th:field="*{roles}">
+                                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${user.getId() != null  && user.getRoles().contains(role.id)}"/>
+                                            </select>
+                                        </div>
+                                        <div class="col form-group">
+                                            <input type="checkbox" class="checkbox" th:field="*{active}">
+                                            <label>Es Activo?</label>
+                                        </div>
+                                    </div>
+                                    <input class="form-control" type="submit" value="Guardar">
+                                </form>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--footer -->
+<footer th:replace="partial/footer.html"/>
+<scripts th:replace="partial/scripts.html"/>
+<script src="/js/user.js"></script>
+</body>
+</html>

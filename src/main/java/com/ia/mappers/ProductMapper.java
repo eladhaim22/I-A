@@ -4,7 +4,10 @@ import com.ia.dto.ProductDTO;
 import com.ia.entity.Product;
 import com.ia.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class ProductMapper implements IMapper<Product,ProductDTO> {
@@ -20,6 +23,8 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         productDTO.setName(model.getName());
         productDTO.setRepositionPoint(model.getRepositionPoint());
         productDTO.setQuantity(model.getQuantity());
+        productDTO.setActive(model.isActive());
+        productDTO.setImageUrl(model.getImageUrl());
         return productDTO;
     }
 
@@ -36,6 +41,8 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         product.setQuantity(dto.getQuantity());
         product.setRepositionPoint(dto.getRepositionPoint());
         product.setSku(dto.getSku());
+        product.setActive(dto.isActive());
+        product.setImageUrl(dto.getImageUrl());
         return product;
     }
 }
