@@ -43,7 +43,7 @@ public class ProductController {
     @GetMapping({"/{id}",""})
     private String getById(@PathVariable(value = "id",required = false) Integer id,Model model) {
         try {
-            logger.info("get product with id {0}", id);
+            logger.info("get products with id {0}", id);
             ProductDTO product = null;
             if (id == null) {
                 product = new ProductDTO();
@@ -65,7 +65,7 @@ public class ProductController {
                 if(bindingResult.hasErrors()){
                     return "products/product.html";
                 }
-            logger.info("saving product");
+            logger.info("saving products");
             productService.save(productDTO);
             return "redirect:product/list";
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     private ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
         try {
-            logger.info("delete product with id {0}", id);
+            logger.info("delete products with id {0}", id);
             productService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {

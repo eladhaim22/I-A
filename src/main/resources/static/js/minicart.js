@@ -1635,7 +1635,7 @@ exports.escape = function(html){
 'use strict';
 
 
-var Product = require('./product'),
+var Product = require('./products'),
     Pubsub = require('./util/pubsub'),
     Storage = require('./util/storage'),
     constants = require('./constants'),
@@ -1694,7 +1694,7 @@ Cart.prototype.add = function add(data) {
         isExisting = false,
         product, key, len, i;
 
-    // Prune cart settings data from the product
+    // Prune cart settings data from the products
     for (key in data) {
         if (constants.SETTINGS.test(key)) {
             this._settings[key] = data[key];
@@ -1702,7 +1702,7 @@ Cart.prototype.add = function add(data) {
         }
     }
 
-    // Look to see if the same product has already been added
+    // Look to see if the same products has already been added
     for (i = 0, len = items.length; i < len; i++) {
         if (items[i].isEqual(data)) {
             product = items[i];
@@ -2055,7 +2055,7 @@ var parser = {
 
 
 /**
- * Creates a new product.
+ * Creates a new products.
  *
  * @constructor
  * @param {object} data Item data
@@ -2079,7 +2079,7 @@ mixin(Product.prototype, Pubsub.prototype);
 
 
 /**
- * Gets the product data.
+ * Gets the products data.
  *
  * @param {string} key (Optional) A key to restrict the returned data to.
  * @return {array|string}
@@ -2090,7 +2090,7 @@ Product.prototype.get = function get(key) {
 
 
 /**
- * Sets a value on the product. This is used rather than manually setting the
+ * Sets a value on the products. This is used rather than manually setting the
  * value so that we can fire a "change" event.
  *
  * @param {string} key
@@ -2110,7 +2110,7 @@ Product.prototype.set = function set(key, value) {
 
 
 /**
- * Parse and return the options for this product.
+ * Parse and return the options for this products.
  *
  * @return {object}
  */
@@ -2152,7 +2152,7 @@ Product.prototype.options = function options() {
 
 
 /**
- * Parse and return the discount for this product.
+ * Parse and return the discount for this products.
  *
  * @param {object} config (Optional) Currency formatting options.
  * @return {number|string}
@@ -2185,7 +2185,7 @@ Product.prototype.discount = function discount(config) {
 
 
 /**
- * Parse and return the total without discounts for this product.
+ * Parse and return the total without discounts for this products.
  *
  * @param {object} config (Optional) Currency formatting options.
  * @return {number|string}
@@ -2209,7 +2209,7 @@ Product.prototype.amount = function amount(config) {
 
 
 /**
- * Parse and return the total for this product.
+ * Parse and return the total for this products.
  *
  * @param {object} config (Optional) Currency formatting options.
  * @return {number|string}
@@ -2229,9 +2229,9 @@ Product.prototype.total = function total(config) {
 
 
 /**
- * Determine if this product has the same data as another.
+ * Determine if this products has the same data as another.
  *
- * @param {object|Product} data Other product.
+ * @param {object|Product} data Other products.
  * @return {boolean}
  */
 Product.prototype.isEqual = function isEqual(data) {
@@ -2265,7 +2265,7 @@ Product.prototype.isEqual = function isEqual(data) {
 
 
 /**
- * Determine if this product is valid.
+ * Determine if this products is valid.
  *
  * @return {boolean}
  */
@@ -2275,7 +2275,7 @@ Product.prototype.isValid = function isValid() {
 
 
 /**
- * Destroys this product. Fires a "destroy" event.
+ * Destroys this products. Fires a "destroy" event.
  */
 Product.prototype.destroy = function destroy() {
     this._data = [];

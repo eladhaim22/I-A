@@ -203,15 +203,16 @@ td.invert-image a img {
 	margin: 2em 0 0;
 }
 
-.checkout-right-basket a {
+.checkout-right-basket a,.checkout-right-basket span {
 	padding: 10px 20px;
 	color: #fff;
 	font-size: 1em;
 	background: #212121;
 	text-decoration: none;
+	cursor: pointer;
 }
 
-.checkout-right-basket a:hover {
+.checkout-right-basket a:hover,.checkout-right-basket span:hover {
 	background: #ff4e00;
 }
 

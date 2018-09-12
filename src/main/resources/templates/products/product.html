@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partial/head.html"/>
+<body>
+    <div class="banner-top container-fluid" id="home">
+        <header th:replace="partial/header.html"/>
+        <div class="banner_inner">
+            <div class="services-breadcrumb">
+                <div class="inner_breadcrumb">
+
+                    <ul class="short">
+                        <li>
+                            <a href="/">Home</a>
+                            <i>|</i>
+                        </li>
+                        <li>
+                            <a href="/product/list">Productos</a>
+                            <i>|</i>
+                        </li>
+                        <li>
+                            Crear/Modificar Producto
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	<!--// header_top -->
+	<!-- top Products -->
+	<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
+		<div class="container">
+			<div class="inner_sec">
+				<div class="contact_grid_right">
+						<div class="row contact_right_grid">
+                            <div class="col-md-3 con-right"></div>
+							<div class="col-md-6 con-right">
+                                <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Crear/Modificar Usuario</h3>
+                                <form class="form-horizontal" enctype="multipart/form-data" action="/product" method="post" th:object="${product}">
+                                    <input type="hidden" th:field="*{id}">
+                                    <div class="row">
+                                        <div class="col form-group">
+                                                <label>Nombre</label>
+                                                <input class="form-control" type="text" th:field="*{name}" placeholder="" required="true">
+                                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label>Codigo de barra</label>
+                                            <input class="form-control" type="text" th:field="*{sku}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}">Sku Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label>Compra en blockes de</label>
+                                            <input class="form-control" type="number" th:field="*{repositionPoint}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('repositionPoint')}" th:errors="*{repositionPoint}">Reposition Point Error</span>
+                                        </div>
+                                        <div class="col form-group">
+                                            <label>Cantidad</label>
+                                            <input class="form-control" type="number" th:field="*{quantity}" placeholder="" required="true">
+                                            <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">Quantity Error</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col form-group">
+                                            <label>Imagen del producto</label>
+                                            <input class="form-control" type="file" th:field="*{file}" placeholder="" required="true">
+                                        </div>
+                                        <div class="col form-group">
+                                            <input type="checkbox" class="checkbox" th:field="*{active}">
+                                            <label>Es Activo?</label>
+                                        </div>
+                                    </div>
+                                    <input class="form-control" type="submit" value="Guardar">
+                                </form>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--footer -->
+<footer th:replace="partial/footer.html"/>
+<scripts th:replace="partial/scripts.html"/>
+<script src="/js/user.js"></script>
+</body>
+</html>
