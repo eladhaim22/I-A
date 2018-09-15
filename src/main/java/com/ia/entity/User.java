@@ -1,9 +1,8 @@
 package com.ia.entity;
 
-import com.ia.validators.Unique;
-import org.hibernate.annotations.Cascade;
+import com.ia.validators.UniqueDNI;
+import com.ia.validators.UniqueEmail;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name ="users")
-@Unique(message = "*El email ya esta registrado.")
+@UniqueEmail(message = "*El email ya esta registrado.")
 public class User {
 
     @Id

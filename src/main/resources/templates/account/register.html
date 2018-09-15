@@ -30,7 +30,7 @@
                             <div class="col-md-3 con-right"></div>
 							<div class="col-md-6 con-right">
                                 <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Register</h3>
-                                <form class="form-horizontal" action="/account/register" method="post" th:object="${user}">
+                                <form class="form-horizontal" action="/account/register" method="post" th:object="${userId}">
                                     <div class="row">
                                         <div class="col form-group">
                                                 <label>Nombre</label>
@@ -56,7 +56,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col form-group">
+                                        <div class="col-md-4 form-group">
+                                            <label>DNI</label>
+                                            <input class="form-control" type="text" th:field="*{person.dni}" placeholder="" required="true"
+                                                   pattern="[0-9]{9}">
+                                            <span th:if="${#fields.hasErrors('person.dni')}" th:errors="*{person.dni}">dni Error</span>
+                                        </div>
+                                        <div class="col-md-8 form-group">
                                             <label>Dirección</label>
                                             <input class="form-control" type="text" th:field="*{person.address}" placeholder="" required="true">
                                             <span th:if="${#fields.hasErrors('person.address')}" th:errors="*{person.address}">address Error</span>

@@ -23,6 +23,7 @@ public class UserMapper implements IMapper<User,UserDTO> {
     @Override
     public UserDTO toDTO(User model) {
         UserDTO userDTO = new UserDTO();
+        userDTO.setId(model.getId());
         userDTO.setEmail(model.getEmail());
         userDTO.setId(model.getId());
         userDTO.setLastName(model.getLastName());

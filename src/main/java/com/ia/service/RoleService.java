@@ -13,18 +13,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
-public class RoleService {
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    public List<Role> getAll() {
-        return roleRepository.findAll();
-    }
-
-    public Role getById(Integer id) throws Exception {
-        Role role = roleRepository.getOne(id);
-       return role;
-    }
+public interface RoleService {
+    List<Role> getAll();
+    Role getById(Integer id) throws Exception;
 }

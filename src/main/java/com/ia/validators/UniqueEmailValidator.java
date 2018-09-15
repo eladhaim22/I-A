@@ -9,18 +9,18 @@ import javax.persistence.FlushModeType;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UniqueValidator implements ConstraintValidator<Unique,User> {
+public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail,User> {
 
     private UserRepository userRepository;
 
     private EntityManager entityManager;
 
-    public UniqueValidator() {
+    public UniqueEmailValidator() {
         userRepository = ApplicationContextProvider.getAppContext().getBean(UserRepository.class);
         entityManager = ApplicationContextProvider.getAppContext().getBean(EntityManager.class);
     }
 
-    public void initialize(Unique constraint) {
+    public void initialize(UniqueEmail constraint) {
     }
 
     public boolean isValid(User user, ConstraintValidatorContext context) {

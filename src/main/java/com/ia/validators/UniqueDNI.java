@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.TYPE, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueValidator.class)
-public @interface Unique {
-    String message() default "Este email ya esta registrado.";
+@Constraint(validatedBy = UniqueDNIValidator.class)
+public @interface UniqueDNI {
+    String message() default "Este dni ya esta registrado.";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

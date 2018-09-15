@@ -14,7 +14,7 @@
                             <i>|</i>
                         </li>
                         <li>
-                            <a href="/admin/user/list">Usuarios</a>
+                            <a href="/admin/userId/list">Usuarios</a>
                             <i>|</i>
                         </li>
                         <li>
@@ -36,7 +36,9 @@
                             <div class="col-md-3 con-right"></div>
 							<div class="col-md-6 con-right">
                                 <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Crear/Modificar Usuario</h3>
-                                <form class="form-horizontal" action="/admin/user" method="post" th:object="${user}">
+                                <form class="form-horizontal" action="/admin/userId" method="post" th:object="${userId}">
+                                    <input class="form-control" name="id" type="hidden" th:value=${userId.id} placeholder="" required="true">
+                                    <input class="form-control" name="person.id" type="hidden" th:value=${userId.person.id} placeholder="" required="true">
                                     <div class="row">
                                         <div class="col form-group">
                                                 <label>Nombre</label>
@@ -62,7 +64,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col form-group">
+                                        <div class="col-md-4 form-group">
+                                            <label>DNI</label>
+                                            <input class="form-control" type="text" th:field="*{person.dni}" placeholder="" required="true"
+                                                   pattern="[0-9]{9}">
+                                            <span th:if="${#fields.hasErrors('person.dni')}" th:errors="*{person.dni}">dni Error</span>
+                                        </div>
+                                        <div class="col-md-8 form-group">
                                             <label>Dirección</label>
                                             <input class="form-control" type="text" th:field="*{person.address}" placeholder="" required="true">
                                             <span th:if="${#fields.hasErrors('person.address')}" th:errors="*{person.address}">address Error</span>
@@ -71,7 +79,7 @@
                                     <div class="row">
                                         <div class="col form-group">
                                             <select class="selectpicker"  multiple data-live-search="true" th:field="*{roles}">
-                                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${user.getId() != null  && user.getRoles().contains(role.id)}"/>
+                                                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${userId.getId() != null  && userId.getRoles().contains(role.id)}"/>
                                             </select>
                                         </div>
                                         <div class="col form-group">
@@ -91,6 +99,6 @@
 	<!--footer -->
 <footer th:replace="partial/footer.html"/>
 <scripts th:replace="partial/scripts.html"/>
-<script src="/js/user.js"></script>
+<script src="/js/userId.js"></script>
 </body>
 </html>

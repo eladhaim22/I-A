@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="checkout-right-basket">
-                        <a href="/admin/user">Nuevo usuario </a>
+                        <a href="/admin/userId">Nuevo usuario </a>
                     </div>
                 </div>
             </div>
@@ -49,22 +49,22 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="user : ${users}" th:id="${user.id}">
-                        <td class="invert" th:text="${user.id}"/>
-                        <td class="invert" th:text="${user.name}"/>
-                        <td class="invert" th:text="${user.lastName}"/>
-                        <td class="invert" th:text="${user.email}"/>
+                    <tr th:each="userId : ${users}" th:id="${userId.id}">
+                        <td class="invert" th:text="${userId.id}"/>
+                        <td class="invert" th:text="${userId.name}"/>
+                        <td class="invert" th:text="${userId.lastName}"/>
+                        <td class="invert" th:text="${userId.email}"/>
                         <td class="invert">
-                            <input th:id="'checkbox-' + ${user.id}" type="checkbox" class="checkbox" th:checked="${user.active}">
+                            <input th:id="'checkbox-' + ${userId.id}" type="checkbox" class="checkbox" th:checked="${userId.active}">
                         </td>
                         <td class="invert">
-                            <select class="selectpicker" th:id="'select-' + ${user.id}" multiple data-live-search="true">
-                                <option th:id="${user.id} + '-' + ${role.id}" th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${user.getRoles().contains(role.id)}"/>
+                            <select class="selectpicker" th:id="'select-' + ${userId.id}" multiple data-live-search="true">
+                                <option th:id="${userId.id} + '-' + ${role.id}" th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${userId.getRoles().contains(role.id)}"/>
                             </select>
                         </td>
                         <td>
                             <div class="checkout-right-basket" style="float:none">
-                                <a th:href="'/admin/user/' + ${user.id}">Modificar</a>
+                                <a th:href="'/admin/userId/' + ${userId.id}">Modificar</a>
                             </div>
                         </td>
                     </tr>
@@ -84,6 +84,6 @@
     /*]]>*/
 </script>
 <scripts th:replace="partial/scripts.html"/>
-<script src="/js/user-list.js"></script>
+<script src="/js/userId-list.js"></script>
 </body>
 </html>

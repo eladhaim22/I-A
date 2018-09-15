@@ -17,6 +17,7 @@ public class PersonMapper implements IMapper<Person,PersonDTO> {
         PersonDTO personDTO = new PersonDTO();
         personDTO.setId(model.getId());
         personDTO.setAddress(model.getAddress());
+        personDTO.setDni(model.getDni());
         return personDTO;
     }
 
@@ -30,6 +31,7 @@ public class PersonMapper implements IMapper<Person,PersonDTO> {
             person = new Person();
         }
         person.setAddress(dto.getAddress());
+        person.setDni(dto.getDni());
         return person;
     }
 }
