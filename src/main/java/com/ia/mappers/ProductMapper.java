@@ -4,16 +4,17 @@ import com.ia.dto.ProductDTO;
 import com.ia.entity.Product;
 import com.ia.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
 
 @Component
 public class ProductMapper implements IMapper<Product,ProductDTO> {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Value("${files.server}")
+    private String filesServer;
 
     @Override
     public ProductDTO toDTO(Product model) {
@@ -24,7 +25,10 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         productDTO.setRepositionPoint(model.getRepositionPoint());
         productDTO.setQuantity(model.getQuantity());
         productDTO.setActive(model.isActive());
-        productDTO.setImageUrl(model.getImageUrl());
+        productDTO.setPrice(model.getPrice());
+        productDTO.setFileName(model.getFileName());
+        productDTO.setImageUrl(filesServer + model.getFileName());
+        productDTO.setDescription(model.getDescription());
         return productDTO;
     }
 
@@ -42,7 +46,9 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         product.setRepositionPoint(dto.getRepositionPoint());
         product.setSku(dto.getSku());
         product.setActive(dto.isActive());
-        product.setImageUrl(dto.getImageUrl());
+        product.setPrice(dto.getPrice());
+        product.setFileName(dto.getFileName());
+        product.setDescription(dto.getDescription());
         return product;
     }
 }

@@ -2,17 +2,18 @@ package com.ia.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Column;
-
 public class ProductDTO {
     private Integer id;
     private String name;
+    private String description;
     private String sku;
     private int repositionPoint;
     private int quantity;
     private boolean active;
-    private String imageUrl;;
+    private String fileName;;
+    private float price;
     private MultipartFile file;
+    private String imageUrl;
 
     public Integer getId() {
         return id;
@@ -62,12 +63,12 @@ public class ProductDTO {
         this.active = active;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public MultipartFile getFile() {
@@ -76,5 +77,29 @@ public class ProductDTO {
 
     public void setFile(MultipartFile file) {
         this.file = file;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -1,9 +1,13 @@
 package com.ia.entity;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="products")
+@Indexed
 public class Product {
 
     @Id
@@ -12,7 +16,11 @@ public class Product {
     private Integer id;
 
     @Column(name="name")
+    @Field
     private String name;
+
+    @Column(name="description")
+    private String description;
 
     @Column(name="sku")
     private String sku;
@@ -27,7 +35,10 @@ public class Product {
     private boolean active;
 
     @Column(name="image_url")
-    private String imageUrl;
+    private String fileName;
+
+    @Column(name="price")
+    private float price;
 
     public Integer getId() {
         return id;
@@ -77,11 +88,27 @@ public class Product {
         this.active = active;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setImageUrl(String url) {
-        this.imageUrl = url;
+    public void setFileName(String url) {
+        this.fileName = url;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
