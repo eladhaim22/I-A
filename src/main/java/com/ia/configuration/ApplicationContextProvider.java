@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ApplicationContextProvider implements ApplicationContextAware {
-    @Autowired
+
     static ApplicationContext context;
 
     @Override

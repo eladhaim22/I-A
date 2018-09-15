@@ -59,6 +59,9 @@
             <column name="address"  type="varchar(255)">
                 <constraints nullable="true"/>
             </column>
+            <column name="dni"  type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
 
         <createTable tableName="products">
@@ -66,6 +69,9 @@
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
             <column name="name"  type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description"  type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="sku"  type="varchar(255)">
@@ -77,11 +83,35 @@
             <column name="quantity"  type="int">
                 <constraints nullable="false"/>
             </column>
+            <column name="price"  type="float">
+                <constraints nullable="false"/>
+            </column>
             <column name="active"  type="boolean">
                 <constraints nullable="false"/>
             </column>
             <column name="image_url"  type="varchar(255)">
                 <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="purchases">
+            <column name="id" type="int" incrementBy="1" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="purchase_date"  type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id"  type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id"  type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_name"  type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price"  type="float">
+                <constraints nullable="false"/>
             </column>
         </createTable>
 
@@ -96,6 +126,16 @@
         <addForeignKeyConstraint baseTableName="users" baseColumnNames="person_id"
                                  constraintName="person_fk"
                                  referencedTableName="persons" referencedColumnNames="id"/>
+
+
+        <addForeignKeyConstraint baseTableName="purchases" baseColumnNames="user_id"
+                                 constraintName="purchases_user_fk"
+                                 referencedTableName="users" referencedColumnNames="id"/>
+
+
+        <addForeignKeyConstraint baseTableName="purchases" baseColumnNames="product_id"
+                                 constraintName="purchases_product_fk"
+                                 referencedTableName="products" referencedColumnNames="id"/>
 
 
     </changeSet>

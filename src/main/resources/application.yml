@@ -1,0 +1,23 @@
+files:
+    folder: src/main/webapp/product_images/
+    server: http://localhost:8080/product_images/
+logging:
+    level:
+        org:
+            springframework:
+                web: INFO
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: none
+            naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        properties:
+            hibernate:
+                search:
+                    default:
+                        directory_provider: filesystem
+                        indexBase: /home/elad/Downloads/
+    liquibase:
+        change-log: classpath:db/liquibase-changelog.xml
+    thymeleaf:
+        cache: false

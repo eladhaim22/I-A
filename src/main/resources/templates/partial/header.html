@@ -14,7 +14,7 @@
                 <ul class="cart-inner-info">
                     <li class="button-log">
                         <a  sec:authorize="!isAuthenticated()" class="btn-open" href="login">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fa fa-userId" aria-hidden="true"></i>
                         </a>
                          <span sec:authorize="isAuthenticated()"> Welcome! <strong sec:authentication="name"></strong>
                                 <a href="/logout"><span class="fa fa-sign-out-alt"></span></a>
@@ -34,8 +34,8 @@
                 <button type="button" class="overlay-close">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
-                <form action="#" method="post" class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search here..." required="">
+                <form action="/search" method="get" class="d-flex">
+                    <input class="form-control" name="name" type="search" placeholder="Search here..." required="">
                     <button type="submit" class="btn btn-primary submit">
                         <i class="fas fa-search"></i>
                     </button>
@@ -116,11 +116,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
                         <a class="nav-link" href="/product/list">Productos</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                        <a class="nav-link" href="/admin/user/list">Usuarios</a>
+                        <a class="nav-link" href="/admin/userId/list">Usuarios</a>
                     </li>
                 </ul>
 

@@ -1,0 +1,10 @@
+spring:
+    datasource:
+        password: 123456
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/ia?autoReconnect=true&amp;useSSL=false
+        username: root
+    jpa:
+        database: MYSQL
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        show-sql: true
