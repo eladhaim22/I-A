@@ -10,10 +10,10 @@
 
                 <ul class="short">
                     <li>
-                        <a href="index.html">Admin</a>
+                        <a href="/">Home</a>
                         <i>|</i>
                     </li>
-                    <li>Usuarios</li>
+                    <li>Mis compras</li>
                 </ul>
             </div>
         </div>
@@ -27,12 +27,7 @@
         <div class="inner-sec-shop px-lg-4 px-3">
             <div class="row">
                 <div class="col-md-8">
-                <h3 class="tittle-w3layouts my-lg-4 mt-3">Usuarios </h3>
-                </div>
-                <div class="col-md-4">
-                    <div class="checkout-right-basket">
-                        <a href="/admin/user">Nuevo usuario </a>
-                    </div>
+                <h3 class="tittle-w3layouts my-lg-4 mt-3">Mis compras </h3>
                 </div>
             </div>
             <div class="checkout-right">
@@ -40,36 +35,28 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                        <th>Activo</th>
-                        <th style="width:25%">Roles</th>
-                        <th>Acciones</th>
+                        <th>Fecha de compra</th>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Reclamos</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="user : ${users}" th:id="${user.id}">
-                        <td class="invert" th:text="${user.id}"/>
-                        <td class="invert" th:text="${user.name}"/>
-                        <td class="invert" th:text="${user.lastName}"/>
-                        <td class="invert" th:text="${user.email}"/>
-                        <td class="invert">
-                            <input th:id="'checkbox-' + ${user.id}" type="checkbox" class="checkbox" th:checked="${user.active}">
-                        </td>
-                        <td class="invert">
-                            <select class="selectpicker" th:id="'select-' + ${user.id}" multiple data-live-search="true">
-                                <option th:id="${user.id} + '-' + ${role.id}" th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}" th:selected="${user.getRoles().contains(role.id)}"/>
-                            </select>
-                        </td>
-                        <td>
-                            <div class="checkout-right-basket" style="float:none">
-                                <a th:href="'/admin/user/' + ${user.id}">Modificar</a>
-                            </div>
-                        </td>
+                    <tbody id="jar">
+                    <tr th:each="purchase : ${purchases}" th:id="${purchase.id}">
+                        <td class="invert" th:text="${purchase.id}"/>
+                        <td class="invert" th:text="${#dates.format(purchase.purchaseDate, 'dd-MM-yyyy HH:mm')}"/>
+                        <td class="invert" th:text="${purchase.productName}"/>
+                        <td class="invert" th:text="${purchase.price}"/>
+                        <td class="invert">Sin reclamos</td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="mx-auto">
+                    <ul class="pagination justify-content-center">
+                    </ul>
+                </div>
             </div>
         </div>
 

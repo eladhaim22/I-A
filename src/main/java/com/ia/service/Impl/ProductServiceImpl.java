@@ -5,6 +5,7 @@ import com.ia.entity.Product;
 import com.ia.mappers.ProductMapper;
 import com.ia.repository.ProductRepository;
 import com.ia.service.ProductService;
+import com.ia.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private FileUtil fileUtil;
 
     @Value("${files.folder}")
     private String filesFolder;
@@ -48,8 +52,7 @@ public class ProductServiceImpl implements ProductService {
     public void save(ProductDTO productDTO){
         try {
             if(!productDTO.getFile().isEmpty()){
-                FileOutputStream output = new FileOutputStream(filesFolder + productDTO.getFile().getOriginalFilename());
-                output.write(productDTO.getFile().getBytes());
+                fileUtil.storeFile(filesFolder + productDTO.getFile().getOriginalFilename(),productDTO.getFile().getBytes());
                 productDTO.setFileName(productDTO.getFile().getOriginalFilename());
             }
             Product product = productMapper.toModel(productDTO);

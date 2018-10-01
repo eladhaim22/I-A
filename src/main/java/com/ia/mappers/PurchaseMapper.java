@@ -7,6 +7,8 @@ import com.ia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.stream.Collectors;
+
 @Component
 public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
 
@@ -19,6 +21,9 @@ public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ReclamoMapper reclamoMapper;
+
     @Override
     public PurchaseDTO toDTO(Purchase model) {
         PurchaseDTO purchaseDTO = new PurchaseDTO();
@@ -28,6 +33,8 @@ public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
         purchaseDTO.setUserId(model.getUser().getId());
         purchaseDTO.setProductName(model.getProductName());
         purchaseDTO.setPrice(model.getPrice());
+        purchaseDTO.setQuantity(model.getQuantity());
+        purchaseDTO.getReclamos().addAll(model.getReclamos().stream().map(r -> reclamoMapper.toDTO(r)).collect(Collectors.toList()));
         return purchaseDTO;
     }
 
@@ -45,6 +52,8 @@ public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
         purchase.setPurchaseDate(dto.getPurchaseDate());
         purchase.setProductName(dto.getProductName());
         purchase.setPrice(dto.getPrice());
+        purchase.setQuantity(dto.getQuantity());
+        purchase.setReclamos(dto.getReclamos().stream().map(r -> reclamoMapper.toModel(r)).collect(Collectors.toList()));
         return purchase;
     }
 }

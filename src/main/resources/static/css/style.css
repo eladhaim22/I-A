@@ -2386,4 +2386,22 @@ ul.links li a:hover {
     }
 }
 
+.page-item.active .page-link {
+    background-color: #ff4e00;
+    border-color: #ff4e00;
+}
+
+.page-link {
+    color: #212121;
+}
+
+.page-link:hover{
+    color: #212121;
+    background-color: rgba(255, 77, 0, 0.6);
+}
+
+.page-link:focus {
+    box-shadow: none !important;
+}
+
 /*-- //responsive media queries --*/

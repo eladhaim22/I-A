@@ -21,3 +21,8 @@ spring:
         change-log: classpath:db/liquibase-changelog.xml
     thymeleaf:
         cache: false
+
+deposite:
+    response: true
+store:
+    id: 2

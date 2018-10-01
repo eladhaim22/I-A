@@ -77,12 +77,6 @@
             <column name="sku"  type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="reposition_point"  type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="quantity"  type="int">
-                <constraints nullable="false"/>
-            </column>
             <column name="price"  type="float">
                 <constraints nullable="false"/>
             </column>
@@ -98,7 +92,7 @@
             <column name="id" type="int" incrementBy="1" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="purchase_date"  type="date">
+            <column name="purchase_date"  type="timestamp">
                 <constraints nullable="false"/>
             </column>
             <column name="user_id"  type="int">
@@ -111,6 +105,30 @@
                 <constraints nullable="false"/>
             </column>
             <column name="price"  type="float">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity"  type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="reclamos">
+            <column name="id" type="int" incrementBy="1" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="tipo"  type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description"  type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="estado"  type="nvarchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active"  type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="purchase_id"  type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -137,6 +155,9 @@
                                  constraintName="purchases_product_fk"
                                  referencedTableName="products" referencedColumnNames="id"/>
 
+        <addForeignKeyConstraint baseTableName="reclamos" baseColumnNames="purchase_id"
+                                 constraintName="purchases_reclamos_fk"
+                                 referencedTableName="purchases" referencedColumnNames="id"/>
 
     </changeSet>
 </databaseChangeLog>

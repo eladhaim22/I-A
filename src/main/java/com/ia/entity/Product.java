@@ -25,12 +25,6 @@ public class Product {
     @Column(name="sku")
     private String sku;
 
-    @Column(name="reposition_point")
-    private int repositionPoint;
-
-    @Column(name="quantity")
-    private int quantity;
-
     @Column(name="active")
     private boolean active;
 
@@ -62,22 +56,6 @@ public class Product {
 
     public void setSku(String sku) {
         this.sku = sku;
-    }
-
-    public int getRepositionPoint() {
-        return repositionPoint;
-    }
-
-    public void setRepositionPoint(int repositionPoint) {
-        this.repositionPoint = repositionPoint;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public boolean isActive() {

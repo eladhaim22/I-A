@@ -1,143 +1,196 @@
 package com.ia;
 
+import com.ia.dto.PersonDTO;
 import com.ia.dto.ProductDTO;
+import com.ia.dto.UserDTO;
+import com.ia.entity.Person;
 import com.ia.entity.Product;
+import com.ia.entity.Role;
+import com.ia.entity.User;
+import com.ia.mappers.PersonMapper;
 import com.ia.mappers.ProductMapper;
+import com.ia.mappers.UserMapper;
+import com.ia.repository.PersonRepository;
 import com.ia.repository.ProductRepository;
+import com.ia.repository.RoleRepository;
+import com.ia.repository.UserRepository;
 import com.ia.service.Impl.ProductServiceImpl;
+import com.ia.service.Impl.UserServiceImpl;
 import com.ia.service.ProductService;
+import com.ia.service.UserService;
+import org.assertj.core.util.Sets;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import static org.hamcrest.CoreMatchers.*;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.beans.SamePropertyValuesAs.samePropertyValuesAs;
 
 @RunWith(SpringRunner.class)
-public class ProductServiceTest {
+public class UserServiceTest {
 
-	private List<Product> products = new ArrayList<>();
-	private List<ProductDTO> productsDTO = new ArrayList<>();
-
-	@Autowired
-	private ProductService productService;
+	private List<User> users = new ArrayList<>();
+	private List<UserDTO> usersDTO = new ArrayList<>();
 
 	@Autowired
-	private ProductMapper productMapper;
+	private UserService userService;
+
+	@Autowired
+	private UserMapper userMapper;
+
+	@Autowired
+	private PersonMapper personMapper;
 
 	@MockBean
-	private ProductRepository productRepository;
+	private UserRepository userRepository;
+
+	@MockBean
+	private RoleRepository roleRepository;
+
+	@MockBean
+	private PersonRepository personRepository;
+
 	@TestConfiguration
-	static class ProductServiceImplTestContextConfiguration {
+	static class UserrServiceImplTestContextConfiguration {
 
 		@Bean
-		public ProductService productService() {
-			ProductService productService = new ProductServiceImpl();
-			return productService;
+		public UserService userService() {
+			return new UserServiceImpl();
 		}
 
 		@Bean
-		public ProductMapper productMapper() {
-			ProductMapper productMapper = new ProductMapper();
-			return productMapper;
+		public UserMapper userMapper() {
+			return new UserMapper();
+		}
+
+		@Bean
+		public PersonMapper personMapper() {
+			return new PersonMapper();
 		}
 	}
 
 	@Before
 	public void setUp() {
-		ReflectionTestUtils.setField(productService, "filesFolder", "src/main/webapp/product_images/");
-		ReflectionTestUtils.setField(productMapper, "filesServer", "http://localhost:8080/product_images/");
-		BuildProductsList();
-		BuildProductsDTOList();
-		Mockito.when(productRepository.getOne(1))
-				.thenReturn(products.get(0));
+		BuildUserList();
+		BuildUserDTOList();
+		Mockito.when(userRepository.getOne(new Long(1)))
+				.thenReturn(users.get(0));
 
-		Mockito.when(productRepository.findAll()).thenReturn(products);
+		Mockito.when(userRepository.findAll()).thenReturn(users);
 	}
 
 	@Test
 	public void canGetByIdAndMapToDTO() throws Exception {
-		ProductDTO p = productService.getById(1);
-		ProductDTO expected = productsDTO.get(0);
-		assertThat(p,samePropertyValuesAs(expected));
+		UserDTO u = userService.getById(new Long(1));
+		UserDTO expected = usersDTO.get(0);
+		assertThat(u,sameBeanAs(expected));
 	}
 
 	@Test
 	public void cannotGetById() {
 		try {
-			ProductDTO p = productService.getById(10);
+			UserDTO u = userService.getById(new Long(10));
 		}
 		catch(Exception e){
-			Assert.assertEquals(e.getMessage(),"El producto no existe" );
+			Assert.assertEquals(e.getMessage(),"El usuario no existe" );
 		}
 	}
 
 	@Test
 	public void canGetAllAndMapToListDTO(){
-		List<ProductDTO> p = productService.getAll();
-		assertThat(p,samePropertyValuesAs(productsDTO));
+		List<UserDTO> p = userService.getAll();
+		assertThat(p,sameBeanAs(usersDTO));
  	}
 
-	private void BuildProductsList(){
-		Product p = null;
-		p = new Product(){{
-				setId(1);
-				setDescription("test-description");
-				setPrice(10);
+ 	private void BuildUserList(){
+		User user = null;
+		user = new User(){{
+				setId(new Long(1));
 				setActive(true);
-				setSku("1000");
-				setName("test-name");
-				setFileName("test-filename");
-			}};
+				setEmail("test-1@test.com");
+				setPerson(new Person(){{
+					setId(1);
+					setDni("1111111");
+					setAddress("test-address-1");
+				}});
+				setName("test-name1");
+				setLastName("test-lastname1");
+				setPassword("password");
+				Set<Role> roleSet = new HashSet<>();
+				roleSet.add(new Role(1,"TEST_ROLE"));
+				setRoles(roleSet);
+		}};
 
-		products.add(p);
+		users.add(user);
 
-		p = new Product(){{
+		user = new User(){{
+			setId(new Long(2));
+			setActive(true);
+			setEmail("test-2@test.com");
+			setPerson(new Person(){{
 				setId(2);
-				setDescription("test-description");
-				setPrice(101);
-				setActive(true);
-				setSku("1001");
-				setName("test-name");
-				setFileName("test-filename");
-			}};
-		products.add(p );
-	}
-	private void BuildProductsDTOList(){
-		ProductDTO p = null;
-		p  = new ProductDTO();
-		p.setDescription("test-description");
-		p.setImageUrl("http://localhost:8080/product_images/test-filename");
-		p.setPrice(10);
-		p.setActive(true);
-		p.setName("test-name");
-		p.setSku("1000");
-		p.setFileName("test-filename");
-		p.setId(1);
-		productsDTO.add(p);
+				setDni("2222222");
+				setAddress("test-address-2");
+			}});
+			setName("test-name2");
+			setLastName("test-lastname2");
+			setPassword("password");
+			Set<Role> roleSet = new HashSet<>();
+			roleSet.add(new Role(1,"TEST_ROLE"));
+			setRoles(roleSet);
+		}};
 
-		p  = new ProductDTO();
-		p.setId(2);
-		p.setDescription("test-description");
-		p.setPrice(101);
-		p.setActive(true);
-		p.setSku("1001");
-		p.setName("test-name");
-		p.setFileName("test-filename");
-		productsDTO.add(p);
+		users.add(user);
+	}
+
+	private void BuildUserDTOList(){
+		UserDTO userDTO = null;
+		userDTO = new UserDTO();
+		userDTO.setId(new Long(1));
+		userDTO.setActive(true);
+		userDTO.setEmail("test-1@test.com");
+		PersonDTO personDTO = new PersonDTO();
+		personDTO.setId(1);
+		personDTO.setDni("1111111");
+		personDTO.setAddress("test-address-1");
+		userDTO.setPerson(personDTO);
+		userDTO.setName("test-name1");
+		userDTO.setLastName("test-lastname1");
+			Set<Integer> roleSet = new HashSet<>();
+			roleSet.add(1);
+		userDTO.setRoles(roleSet);
+
+		usersDTO.add(userDTO);
+
+		userDTO = new UserDTO();
+		userDTO.setId(new Long(2));
+		userDTO.setActive(true);
+		userDTO.setEmail("test-2@test.com");
+		personDTO = new PersonDTO();
+		personDTO.setId(2);
+		personDTO.setDni("2222222");
+		personDTO.setAddress("test-address-2");
+		userDTO.setPerson(personDTO);
+		userDTO.setName("test-name2");
+		userDTO.setLastName("test-lastname2");
+		roleSet = new HashSet<>();
+		roleSet.add(1);
+		userDTO.setRoles(roleSet);
+
+		usersDTO.add(userDTO);
 	}
 }

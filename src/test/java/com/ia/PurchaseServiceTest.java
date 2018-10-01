@@ -25,7 +25,7 @@ import static com.shazam.shazamcrest.matcher.Matchers.sameBeanAs;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(SpringRunner.class)
-public class SearchServiceTest {
+public class PurchaseServiceTest {
 
 	private List<Product> products = new ArrayList<>();
 	private List<ProductDTO> productsDTO = new ArrayList<>();

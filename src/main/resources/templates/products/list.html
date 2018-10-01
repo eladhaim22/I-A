@@ -42,19 +42,15 @@
                             <th>#</th>
                             <th>Nombre</th>
                             <th>SKU</th>
-                            <th>Cant. Compra</th>
-                            <th>Cantidad</th>
                             <th>Precio</th>
                             <th style="width:25%">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="jar">
                         <tr th:each="product : ${products}" th:id="'product-' + ${product.id}">
                             <td th:text="${product.id}"/>
                             <td th:text="${product.name}"/>
                             <td th:text="${product.sku}"/>
-                            <td th:text="${product.repositionPoint}"/>
-                            <td th:text="${product.quantity}"/>
                             <td th:text="${product.price}"/>
                             <td >
                                 <div class="checkout-right-basket" style="float:none;display: inline-block;">
@@ -67,6 +63,12 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="mx-auto">
+                    <ul class="pagination justify-content-center">
+                    </ul>
+                </div>
             </div>
         </div>
 

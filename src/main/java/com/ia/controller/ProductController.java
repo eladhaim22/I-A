@@ -40,10 +40,29 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/{id}/details")
+    private String getDetails(@PathVariable(value = "id") Integer id,Model model) {
+        try {
+            logger.info("get product with id {0}", id);
+            ProductDTO product = null;
+            if (id == null) {
+                product = new ProductDTO();
+            } else {
+                product = productService.getById(id);
+            }
+            model.addAttribute("product",product);
+            return "products/details.html";
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
+            return "";
+        }
+    }
+
     @GetMapping({"/{id}",""})
     private String getById(@PathVariable(value = "id",required = false) Integer id,Model model) {
         try {
-            logger.info("get products with id {0}", id);
+            logger.info("get product with id {0}", id);
             ProductDTO product = null;
             if (id == null) {
                 product = new ProductDTO();
@@ -85,4 +104,6 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 }

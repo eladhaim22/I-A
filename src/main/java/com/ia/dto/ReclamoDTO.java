@@ -1,30 +1,13 @@
-package com.ia.entity;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+package com.ia.dto;
 
 import javax.persistence.*;
-import java.util.Date;
 
-@Entity
-@Table(name="reclamos")
-public class Reclamo {
+public class ReclamoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private  Integer id;
-
-    @Column(name="tipo")
     private String tipo;
-
-    @Column(name="description")
     private String description;
-
-    @Column(name="estado")
     private String estado;
-
-    @Column(name="active")
     private boolean active;
 
     public Integer getId() {

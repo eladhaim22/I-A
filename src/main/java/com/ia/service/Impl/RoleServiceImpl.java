@@ -17,9 +17,4 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
-
-    public Role getById(Integer id) throws Exception {
-        Role role = roleRepository.getOne(id);
-       return role;
-    }
 }

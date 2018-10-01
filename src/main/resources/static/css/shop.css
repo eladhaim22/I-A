@@ -1131,6 +1131,33 @@ ul.footer_list_icons.single_in li a:hover {
     background: #ff4e00;
 }
 
+.description input[type="number"] {
+	padding: 8px 8px;
+	color: #424040;
+	font-size: 15px;
+	width: 45%;
+	outline: none;
+	letter-spacing: 1px;
+	float: left;
+	border-radius: 0;
+}
+
+.description input[type="button"] {
+	color: #fff;
+	font-size: 16px;
+	background: #333;
+	border: none;
+	outline: none;
+	padding: 7px 17px 9px;
+	letter-spacing: 2px;
+	cursor: pointer;
+	text-transform: uppercase;
+}
+
+.description input[type="button"]:hover {
+	background: #ff4e00;
+}
+
 .occasion-cart a {
 	padding: 8px 20px;
 	text-decoration: none;

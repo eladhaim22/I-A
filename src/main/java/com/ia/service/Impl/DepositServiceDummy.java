@@ -1,12 +1,24 @@
 package com.ia.service.Impl;
 
+import com.ia.entity.Product;
+import com.ia.entity.User;
+import com.ia.externaldto.ExternalDepositeDTO;
 import com.ia.service.DepositService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DepositServiceDummy implements DepositService {
+public class DepositServiceDummy extends DepositService {
 
-    public int hasStock(String sku,int quantity){
-        return 8;
+    @Value("${deposite.response}")
+    private boolean depositeResponse;
+
+    public boolean hasStock(String sku,int quantity){
+        return depositeResponse;
     }
+
+    public void sendPurchase(User user, Product product, int quantity) {
+        this.loadExternal(user,product,quantity);
+    }
+
 }

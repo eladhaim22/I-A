@@ -57,25 +57,17 @@ public class PurchaseServiceImpl implements PurchaseService {
             purchaseRepository.saveAndFlush(purchase);
     }
 
-    public boolean purchase(Integer productId) throws Exception {
+    public boolean purchase(Integer productId,Integer quantity) throws Exception {
         try {
             PurchaseDTO purchaseDTO = null;
             ProductDTO productDTO = productService.getById(productId);
-            if(productDTO.getQuantity() > 0){
-                productDTO.setQuantity(productDTO.getQuantity() - 1);
-                createPurchase(productDTO);
+            if(depositService.hasStock(productDTO.getSku(),quantity)){
+                purchaseDTO = createPurchase(productDTO,quantity);
+                save(purchaseDTO);
             }
-            else {
-                int depositStock = depositService.hasStock(productDTO.getSku(),productDTO.getRepositionPoint());
-                if(depositStock > 0){
-                    productDTO.setQuantity(Math.min(depositStock,productDTO.getRepositionPoint()) -1);
-                    createPurchase(productDTO);
-                }
-                else{
-                    return false;
-                }
+            else{
+                return false;
             }
-            save(purchaseDTO);
             return true;
         }
         catch (Exception e){
@@ -83,7 +75,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
     }
 
-    private PurchaseDTO createPurchase(ProductDTO productDTO){
+    private PurchaseDTO createPurchase(ProductDTO productDTO,int quantity){
         String userEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         Long userId = userService.getByMail(userEmail).getId();
         PurchaseDTO purchaseDTO = new PurchaseDTO();
@@ -92,6 +84,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchaseDTO.setPurchaseDate(new Date());
         purchaseDTO.setPrice(productDTO.getPrice());
         purchaseDTO.setUserId(userId);
+        purchaseDTO.setQuantity(quantity);
         return purchaseDTO;
     }
 }

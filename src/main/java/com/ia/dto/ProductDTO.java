@@ -7,8 +7,6 @@ public class ProductDTO {
     private String name;
     private String description;
     private String sku;
-    private int repositionPoint;
-    private int quantity;
     private boolean active;
     private String fileName;;
     private float price;
@@ -37,22 +35,6 @@ public class ProductDTO {
 
     public void setSku(String sku) {
         this.sku = sku;
-    }
-
-    public int getRepositionPoint() {
-        return repositionPoint;
-    }
-
-    public void setRepositionPoint(int repositionPoint) {
-        this.repositionPoint = repositionPoint;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     public boolean isActive() {

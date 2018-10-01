@@ -7,31 +7,25 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="purchases")
-public class Purchase {
+@Table(name="reclamos")
+public class Reclamo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private  Integer id;
 
-    @JoinColumn(name="purchaseDate")
-    private Date purchaseDate;
+    @Column(name="tipo")
+    private String tipo;
 
-    @OneToOne
-    @JoinColumn(name="user_id")
-    private User user;
+    @Column(name="description")
+    private String description;
 
-    @OneToOne
-    @JoinColumn(name="product_id")
-    @Cascade(CascadeType.ALL)
-    private Product product;
+    @Column(name="estado")
+    private String estado;
 
-    @Column(name="product_name")
-    private String productName;
-
-    @Column(name="price")
-    private float price;
+    @Column(name="active")
+    private boolean active;
 
     public Integer getId() {
         return id;
@@ -41,43 +35,35 @@ public class Purchase {
         this.id = id;
     }
 
-    public Date getPurchaseDate() {
-        return purchaseDate;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setPurchaseDate(Date purchaseDate) {
-        this.purchaseDate = purchaseDate;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public User getUser() {
-        return user;
+    public String getDescription() {
+        return description;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getProductName() {
-        return productName;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

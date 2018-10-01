@@ -14,7 +14,7 @@
                 <ul class="cart-inner-info">
                     <li class="button-log">
                         <a  sec:authorize="!isAuthenticated()" class="btn-open" href="login">
-                            <i class="fa fa-userId" aria-hidden="true"></i>
+                            <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
                          <span sec:authorize="isAuthenticated()"> Welcome! <strong sec:authentication="name"></strong>
                                 <a href="/logout"><span class="fa fa-sign-out-alt"></span></a>
@@ -120,7 +120,10 @@
                         <a class="nav-link" href="/product/list">Productos</a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                        <a class="nav-link" href="/admin/userId/list">Usuarios</a>
+                        <a class="nav-link" href="/admin/user/list">Usuarios</a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+                        <a class="nav-link" href="/purchase/list">Mis Compras</a>
                     </li>
                 </ul>
 

@@ -17,5 +17,5 @@ public interface PurchaseService {
      PurchaseDTO getById(Integer id) throws Exception;
      List<PurchaseDTO> getAllByUser();
      void save(PurchaseDTO purchaseDTO);
-    boolean purchase(Integer productId) throws Exception;
+    boolean purchase(Integer productId,Integer quantity) throws Exception;
 }

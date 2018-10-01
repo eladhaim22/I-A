@@ -4,8 +4,12 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name="purchases")
 public class Purchase {
 
     @Id
@@ -22,7 +26,6 @@ public class Purchase {
 
     @OneToOne
     @JoinColumn(name="product_id")
-    @Cascade(CascadeType.ALL)
     private Product product;
 
     @Column(name="product_name")
@@ -30,6 +33,13 @@ public class Purchase {
 
     @Column(name="price")
     private float price;
+
+    @Column(name="quantity")
+    private int quantity;
+
+    @OneToMany
+    @JoinColumn(name = "purchase_id")
+    private List<Reclamo> reclamos = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -77,5 +87,21 @@ public class Purchase {
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public List<Reclamo> getReclamos() {
+        return reclamos;
+    }
+
+    public void setReclamos(List<Reclamo> reclamos) {
+        this.reclamos = reclamos;
     }
 }

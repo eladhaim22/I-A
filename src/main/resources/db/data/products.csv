@@ -1,4 +1,4 @@
-id;name;description;sku;reposition_point;quantity;price;active;image_url
-1;Producto1;Producto1;111;10;10;15;true;url
-2;Producto2;Producto2;222;10;10;20;true;url
-3;Producto3;Producto3;333;10;10;25;true;url
+id;name;description;sku;price;active;image_url
+1;Producto1;Producto1;111;15;true;d1.jpg
+2;Producto2;Producto2;222;20;true;d2.jpg
+3;Producto3;Producto3;333;25;true;d3.jpg

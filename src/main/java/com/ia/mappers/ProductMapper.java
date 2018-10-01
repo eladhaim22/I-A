@@ -22,8 +22,6 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         productDTO.setId(model.getId());
         productDTO.setSku(model.getSku());
         productDTO.setName(model.getName());
-        productDTO.setRepositionPoint(model.getRepositionPoint());
-        productDTO.setQuantity(model.getQuantity());
         productDTO.setActive(model.isActive());
         productDTO.setPrice(model.getPrice());
         productDTO.setFileName(model.getFileName());
@@ -42,8 +40,6 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
             product = new Product();
         }
         product.setName(dto.getName());
-        product.setQuantity(dto.getQuantity());
-        product.setRepositionPoint(dto.getRepositionPoint());
         product.setSku(dto.getSku());
         product.setActive(dto.isActive());
         product.setPrice(dto.getPrice());
