@@ -2411,4 +2411,14 @@ span.error {
 .view-more{
     cursor: pointer;
 }
+
+.login-class{
+    text-align: center;
+    background: none;
+    letter-spacing: 2px;
+    color: #454546;
+    cursor: pointer;
+    border: 1px solid #dde2e6;
+    padding: 0.5em 1em;
+}
 /*-- //responsive media queries --*/
