@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(final String login) {
         log.debug("Authenticating {}", login);
-        Optional<User> userFromDatabase = userRepository.findByEmail(login);
+        Optional<User> userFromDatabase = userRepository.findByEmailAndActiveIsTrue(login);
         return userFromDatabase.map(user -> {
             List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
                     .map(role -> new SimpleGrantedAuthority(role.getRole()))
