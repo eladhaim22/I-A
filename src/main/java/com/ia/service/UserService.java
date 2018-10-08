@@ -22,4 +22,5 @@ public interface UserService {
     void addRolesToUser(Long id, Integer[] rolesId) throws Exception;
     void saveUser(User user);
     void toggleActive(Long userId,boolean active);
+    void register(User user);
 }

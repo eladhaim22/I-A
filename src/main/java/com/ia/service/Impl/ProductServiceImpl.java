@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<ProductDTO> getAll(){
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productRepository.findAllByActiveIsTrue();
         return products.stream().map(p -> productMapper.toDTO(p)).collect(Collectors.toList());
     }
 

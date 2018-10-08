@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -79,16 +80,19 @@ public class ProductController {
     }
 
     @PostMapping("")
-    private String save(@Valid @ModelAttribute("product") ProductDTO productDTO,BindingResult bindingResult) {
+    private String save(@Valid @ModelAttribute("product") ProductDTO productDTO, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         try {
                 if(bindingResult.hasErrors()){
                     return "products/product.html";
                 }
             logger.info("saving products");
             productService.save(productDTO);
+            String msg = productDTO.getId() != null ? "productUpdateSuccess" : "productCreateSuccess";
+            redirectAttributes.addAttribute("msg", msg);
             return "redirect:product/list";
         } catch (Exception e) {
             logger.error(e.getMessage());
+            redirectAttributes.addAttribute("msg", "productSaveError");
             throw e;
         }
     }

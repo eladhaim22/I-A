@@ -34,6 +34,6 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail,Use
         } finally {
             entityManager.setFlushMode(FlushModeType.AUTO);
         }
-        return false;
+        return true;
     }
 }

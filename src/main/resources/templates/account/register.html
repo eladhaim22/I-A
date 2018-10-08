@@ -59,7 +59,7 @@
                                         <div class="col-md-4 form-group">
                                             <label>DNI</label>
                                             <input class="form-control" type="text" th:field="*{person.dni}" placeholder="" required="true"
-                                                   pattern="[0-9]{9}">
+                                                   pattern="[0-9]{8}">
                                             <span th:if="${#fields.hasErrors('person.dni')}" th:errors="*{person.dni}">dni Error</span>
                                         </div>
                                         <div class="col-md-8 form-group">

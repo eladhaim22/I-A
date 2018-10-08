@@ -12,9 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -81,13 +79,28 @@ public class UserServiceImpl implements UserService {
     }
 
     public void saveUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        else{
+            user.setPassword(userRepository.getOne(user.getId()).getPassword());
+        }
         userRepository.saveAndFlush(user);
     }
 
     public void toggleActive(Long userId,boolean active) {
         User user = userRepository.getOne(userId);
         user.setActive(active);
+        userRepository.saveAndFlush(user);
+    }
+
+    public void register(User user){
+        Role role = roleRepository.findByRole("ROLE_USER");
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
+        user.setActive(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.saveAndFlush(user);
     }
 }

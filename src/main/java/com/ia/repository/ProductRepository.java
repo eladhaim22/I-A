@@ -10,4 +10,5 @@ import java.util.Set;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
+    List<Product> findAllByActiveIsTrue();
 }

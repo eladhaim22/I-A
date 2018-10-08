@@ -48,4 +48,37 @@ $(document).ready(function() {
             });
         });
     });
+
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('msg')){
+        var msg;
+        switch (urlParams.get('msg')){
+            case 'productUpdateSuccess':
+                msg = {
+                    sucess:true,
+                    text: 'El producuo se modifico exitosamente'
+                };
+
+                break;
+            case 'productCreateSuccess':
+                msg = {
+                    sucess: true,
+                    text: 'El producuo se creo exitosamente'
+                }
+                break;
+            case 'productSaveError':
+                msg = {
+                    sucess: false,
+                    text: 'Hubo un error, no se pude guardar el producto'
+                }
+                break;
+        }
+        var myToast = Toastify({
+            text: msg.text,
+            duration: 5000,
+            close: true,
+            backgroundColor: msg.sucess ? 'green' : 'red'
+        }).showToast();
+    }
+
 });

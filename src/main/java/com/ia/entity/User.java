@@ -2,6 +2,7 @@ package com.ia.entity;
 
 import com.ia.validators.UniqueDNI;
 import com.ia.validators.UniqueEmail;
+import com.ia.validators.UserRegistration;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class User {
 
     @Column(name = "password")
     @Length(min = 5, message = "*Tu contraseña debe tener al menos 5 caracteres")
-    @NotEmpty(message = "*Please provide your password")
+    @NotEmpty(message = "*Please provide your password",groups =  UserRegistration.class)
     private String password;
 
     @Column(name = "name")

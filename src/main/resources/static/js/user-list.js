@@ -43,4 +43,36 @@ $(document).ready(function() {
             });
         }
     });
+
+    var urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('msg')){
+        var msg;
+        switch (urlParams.get('msg')){
+            case 'userUpdateSuccess':
+                msg = {
+                    sucess:true,
+                    text: 'El usuario se modifico exitosamente'
+                };
+                break;
+            case 'userCreateSuccess':
+                msg = {
+                    sucess: true,
+                    text: 'El usuario se creo exitosamente'
+                }
+                break;
+            case 'userSaveError':
+                msg = {
+                    sucess: false,
+                    text: 'Hubo un error, no se pudo guardar el usuario'
+                }
+                break;
+        }
+        var myToast = Toastify({
+            text: msg.text,
+            duration: 5000,
+            close: true,
+            backgroundColor: msg.sucess ? 'green' : 'red'
+        }).showToast();
+    }
+
 });

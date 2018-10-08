@@ -13,9 +13,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import javax.validation.groups.Default;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collector;
@@ -68,11 +71,13 @@ public class UserController {
     }
 
     @PostMapping("")
-    public String saveUser(@Valid @ModelAttribute("user") User newUser, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public String saveUser(@Validated(Default.class) @ModelAttribute("user") User newUser, BindingResult bindingResult, RedirectAttributes redirectAttributes){
+            if(bindingResult.hasErrors()){
             return "users/user";
         }
         userService.saveUser(newUser);
+        String msg =newUser.getId() != null ? "userUpdateSuccess" : "userCreateSuccess";
+        redirectAttributes.addAttribute("msg", msg);
         return "redirect:/admin/user/list";
     }
 

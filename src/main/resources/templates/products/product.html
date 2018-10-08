@@ -17,9 +17,7 @@
                             <a href="/product/list">Productos</a>
                             <i>|</i>
                         </li>
-                        <li>
-                            Crear/Modificar Producto
-                        </li>
+                        <li th:text="${product.id != null ? 'Modificar Producto' : 'Crear Producto'}"/>
                     </ul>
                 </div>
             </div>
@@ -35,7 +33,7 @@
 						<div class="row contact_right_grid">
                             <div class="col-md-3 con-right"></div>
 							<div class="col-md-6 con-right">
-                                <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Crear/Modificar Usuario</h3>
+                                <h3 class="tittle-w3layouts text-center my-lg-4 my-4" th:text="${product.id != null ? 'Modificar Producto' : 'Crear Producto'}"/>
                                 <form class="form-horizontal" enctype="multipart/form-data" action="/product" method="post" th:object="${product}">
                                     <input type="hidden" th:field="*{id}">
                                     <div class="row">

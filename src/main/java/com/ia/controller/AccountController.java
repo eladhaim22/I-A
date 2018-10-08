@@ -38,7 +38,7 @@ public class AccountController {
         if(bindingResult.hasErrors()){
             return "account/register";
         }
-        userService.saveUser(newUser);
+        userService.register(newUser);
       return "/account/registerSuccess";
     }
 

@@ -17,9 +17,7 @@
                             <a href="/admin/user/list">Usuarios</a>
                             <i>|</i>
                         </li>
-                        <li>
-                            Crear/Modificar Usuario
-                        </li>
+                        <li th:text="${user.id != null ? 'Modificar Usuario' : 'Crear Usuario'}"/>
                     </ul>
                 </div>
             </div>
@@ -35,7 +33,7 @@
 						<div class="row contact_right_grid">
                             <div class="col-md-3 con-right"></div>
 							<div class="col-md-6 con-right">
-                                <h3 class="tittle-w3layouts text-center my-lg-4 my-4">Crear/Modificar Usuario</h3>
+                                <h3 class="tittle-w3layouts text-center my-lg-4 my-4" th:text="${user.id != null ? 'Modificar Usuario' : 'Crear Usuario'}" />
                                 <form class="form-horizontal" action="/admin/user" method="post" th:object="${user}">
                                     <input class="form-control" name="id" type="hidden" th:value=${user.id} placeholder="" required="true">
                                     <input class="form-control" name="person.id" type="hidden" th:value=${user.person.id} placeholder="" required="true">
@@ -54,20 +52,28 @@
                                     <div class="row">
                                         <div class="col form-group">
                                             <label>Email</label>
-                                            <input class="form-control" type="text" th:field="*{email}" placeholder="" required="true">
+                                            <input class="form-control" type="text" th:field="*{email}" placeholder="" required="true" th:readonly="${user.id != null ? true : false}">
                                             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
                                         </div>
+                                    </div>
+                                    <div th:if="${user.id}" class="row">
                                         <div class="col form-group">
-                                            <label>Contraseña</label>
-                                            <input class="form-control" type="password" th:field="*{password}" placeholder="" required="true">
-                                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+                                            <input id="passwordchange" type="checkbox" class="checkbox">
+                                            <label>Quiero cambiar la contraseña?</label>
+                                        </div>
+                                    </div>
+                                    <div id="passwordContainer" class="row" th:classappend="${user.id} ? 'd-none' : ''">
+                                        <div  class="col form-group">
+                                                <label>Contraseña</label>
+                                                <input class="form-control" type="password" th:field="*{password}" placeholder="" th:disabled="${user.id} ? true : false">
+                                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 form-group">
                                             <label>DNI</label>
                                             <input class="form-control" type="text" th:field="*{person.dni}" placeholder="" required="true"
-                                                   pattern="[0-9]{9}">
+                                                   pattern="[0-9]{8}">
                                             <span th:if="${#fields.hasErrors('person.dni')}" th:errors="*{person.dni}">dni Error</span>
                                         </div>
                                         <div class="col-md-8 form-group">
