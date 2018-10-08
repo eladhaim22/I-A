@@ -1,13 +1,10 @@
 $(document).ready(function() {
    //Products - list
     function confirmDialog() {
-        var dialog = $(`
-                <div id="dialog-confirm" title="Confirmacion">
-                    <p>
-                        <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
-                        Seguro que queres borrar este producto?
-                        </p>
-                </div>`);
+            var dialog = $(`<div id="dialog-confirm" class="ui-dialog-content ui-widget-content" title="Confirmacion" style="width: auto; min-height: 13px; max-height: none; height: auto;">
+                                        <div id="dialog-confirm" >
+                                        <p>Seguro que queres borrar este producto?</p>
+                                    </div>`);
         var def = $.Deferred();
         $(dialog).dialog({
             resizable: false,
@@ -33,8 +30,8 @@ $(document).ready(function() {
             confirmDialog().done(function() {
                 $.ajax({
                     type: "DELETE",
-                    dataType: 'json',
                     contentType: 'application/json',
+                    dataType: 'text',
                     url: `/product/${value.id}`,
                     data: value.id,
                     success:function(){
@@ -69,7 +66,7 @@ $(document).ready(function() {
             case 'productSaveError':
                 msg = {
                     sucess: false,
-                    text: 'Hubo un error, no se pude guardar el producto'
+                    text: 'Hubo un error, no se pudo guardar el producto'
                 }
                 break;
         }

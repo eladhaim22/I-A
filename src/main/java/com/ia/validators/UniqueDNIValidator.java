@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Optional;
 
 public class UniqueDNIValidator implements ConstraintValidator<UniqueDNI,Person> {
 
@@ -30,12 +31,16 @@ public class UniqueDNIValidator implements ConstraintValidator<UniqueDNI,Person>
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate("Este dni ya esta registrado.").addPropertyNode("dni").addConstraintViolation();
             entityManager.setFlushMode(FlushModeType.COMMIT);
-            if (person.getId() == null) {
-                return !personRepository.findByDni(person.getDni()).isPresent();
+            Optional<Person> personToCompare = personRepository.findByDni(person.getDni());
+            if (!personToCompare.isPresent()) {
+                return true;
+            }
+            else if(person.getId() != null && personToCompare.isPresent() && person.getId() == personToCompare.get().getId()) {
+                return true;
             }
         } finally {
             entityManager.setFlushMode(FlushModeType.AUTO);
         }
-        return true;
+        return false;
     }
 }

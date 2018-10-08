@@ -41,6 +41,21 @@ public class ProductController {
         }
     }
 
+
+    @GetMapping("/listActive")
+    private String getAllActive(Model model){
+        try{
+            logger.info("get all products");
+            List<ProductDTO> products = productService.getAllActive();
+            model.addAttribute("products",products);
+            return "products/list.html";
+        }
+        catch (Exception e) {
+            logger.error(e.getMessage());
+            return "";
+        }
+    }
+
     @GetMapping("/{id}/details")
     private String getDetails(@PathVariable(value = "id") Integer id,Model model) {
         try {
@@ -52,6 +67,7 @@ public class ProductController {
                 product = productService.getById(id);
             }
             model.addAttribute("product",product);
+            model.addAttribute("products",productService.getAllActive().subList(0,8 ));
             return "products/details.html";
         }
         catch (Exception e) {
@@ -100,7 +116,7 @@ public class ProductController {
     @DeleteMapping("/{id}")
     private ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
         try {
-            logger.info("delete products with id {0}", id);
+                logger.info("delete products with id {0}", id);
             productService.delete(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {

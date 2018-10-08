@@ -28,11 +28,11 @@ public class SearchController {
             logger.info("get all products");
             List<ProductDTO> products = searchService.fuzzySearch(searchTerm);
             model.addAttribute("products",products);
-            return "home";
+            return "search/list";
         }
         catch (Exception e) {
             logger.error(e.getMessage());
-            return "";
+            return "search/list";
         }
     }
 }

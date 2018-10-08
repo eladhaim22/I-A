@@ -38,7 +38,7 @@
                                     <div class="form-group">
                                         <label>Contraseña</label>
                                         <input class="form-control" type="password" name="password" placeholder="" required="true">
-                                        <span th:if="${param.error}" style="color:red">El email o contraseña estan incorrectos.</span>
+                                        <span th:if="${param.error}" class="error">El email o contraseña estan incorrectos.</span>
                                     </div>
                                     <input class="form-control" type="submit" value="Submit">
                                     <span>Todavia no tenes cuenta <a href="/account/register">haga click aca!</a> </span>

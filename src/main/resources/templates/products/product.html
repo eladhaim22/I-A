@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="partial/head.html"/>
 <body>
     <div class="banner-top container-fluid" id="home">
@@ -40,21 +40,21 @@
                                         <div class="col form-group">
                                                 <label>Nombre</label>
                                                 <input class="form-control" type="text" th:field="*{name}" placeholder="" required="true">
-                                                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+                                                <span  class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col form-group">
                                             <label>Codigo de barra</label>
                                             <input class="form-control" type="text" th:field="*{sku}" placeholder="" required="true">
-                                            <span th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}">Sku Error</span>
+                                            <span  class="error" th:if="${#fields.hasErrors('sku')}" th:errors="*{sku}">Sku Error</span>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col form-group">
                                             <label>Precio</label>
                                             <input class="form-control" type="number" step="0.1" th:field="*{price}" placeholder="" required="true">
-                                            <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+                                            <span  class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
                                         </div>
                                         <div class="col form-group">
                                             <input type="checkbox" class="checkbox" th:field="*{active}">
@@ -65,7 +65,7 @@
                                         <div class="col form-group">
                                             <label>Descripción</label>
                                             <textarea class="form-control" rows="4" style="resize: none;" th:field="*{description}" placeholder="" required="true"/>
-                                            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
+                                            <span  class="error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</span>
                                         </div>
                                     </div>
                                     <div class="row">

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="partial/head.html"/>
 <body>
 <div class="banner-top container-fluid" id="home">
@@ -37,7 +37,9 @@
                         <th>#</th>
                         <th>Fecha de compra</th>
                         <th>Producto</th>
-                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Precio unidad</th>
+                        <th>Monto Total</th>
                         <th>Reclamos</th>
                     </tr>
                     </thead>
@@ -46,7 +48,9 @@
                         <td class="invert" th:text="${purchase.id}"/>
                         <td class="invert" th:text="${#dates.format(purchase.purchaseDate, 'dd-MM-yyyy HH:mm')}"/>
                         <td class="invert" th:text="${purchase.productName}"/>
-                        <td class="invert" th:text="${purchase.price}"/>
+                        <td class="invert" th:text="${purchase.quantity}"/>
+                        <td class="invert" th:text="'$' + ${purchase.price}"/>
+                        <td class="invert" th:text="'$' + ${purchase.price}*${purchase.quantity}"/>
                         <td class="invert">Sin reclamos</td>
                     </tr>
                     </tbody>

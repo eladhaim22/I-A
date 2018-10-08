@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public interface ProductService {
      ProductDTO getById(Integer id) throws Exception;
      List<ProductDTO> getAll();
+     List<ProductDTO> getAllActive();
      void delete(Integer id);
      void save(ProductDTO productDTO);
 }

@@ -1,7 +1,9 @@
 package com.ia.dto;
 
+import com.ia.validators.UniqueSku;
 import org.springframework.web.multipart.MultipartFile;
 
+@UniqueSku(message = "*El codigo de barra ya existe.")
 public class ProductDTO {
     private Integer id;
     private String name;

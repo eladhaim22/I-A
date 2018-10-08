@@ -60,6 +60,16 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    public User getUserByMail(String email){
+        User user = userRepository.findByEmail(email).orElse(null);
+        if(user != null){
+            return user;
+        }
+        else {
+            return null;
+        }
+    }
+
     public List<UserDTO> getAll(){
         List<User> users = userRepository.findAll();
         return users.stream().map(u -> userMapper.toDTO(u)).collect(Collectors.toList());
@@ -87,6 +97,24 @@ public class UserServiceImpl implements UserService {
         }
         userRepository.saveAndFlush(user);
     }
+
+    public void updateUser(User updatedUser){
+        if(updatedUser.getPassword() != null) {
+            updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
+        else{
+            updatedUser.setPassword(userRepository.getOne(updatedUser.getId()).getPassword());
+        }
+        User user = userRepository.getOne(updatedUser.getId());
+        user.setPassword(updatedUser.getPassword());
+        user.setLastName(updatedUser.getLastName());
+        user.setName(updatedUser.getName());
+        user.getPerson().setAddress(updatedUser.getPerson().getAddress());
+        user.getPerson().setDni(updatedUser.getPerson().getDni());
+        userRepository.saveAndFlush(user);
+    }
+
+
 
     public void toggleActive(Long userId,boolean active) {
         User user = userRepository.getOne(userId);

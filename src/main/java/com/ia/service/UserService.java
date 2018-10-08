@@ -18,9 +18,11 @@ public interface UserService {
     UserDTO getById(Long id) throws Exception;
     User getUserById(Long id) throws Exception;
     UserDTO getByMail(String email);
+    User getUserByMail(String email);
     List<UserDTO> getAll();
     void addRolesToUser(Long id, Integer[] rolesId) throws Exception;
     void saveUser(User user);
     void toggleActive(Long userId,boolean active);
     void register(User user);
+    void updateUser(User newUser);
 }

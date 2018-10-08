@@ -1,5 +1,7 @@
 package com.ia.entity;
 
+import com.ia.validators.UniqueEmail;
+import com.ia.validators.UniqueSku;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 

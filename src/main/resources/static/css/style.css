@@ -2404,4 +2404,8 @@ ul.links li a:hover {
     box-shadow: none !important;
 }
 
+span.error {
+    color:red;
+}
+
 /*-- //responsive media queries --*/

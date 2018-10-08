@@ -41,9 +41,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public List<ProductDTO> getAll(){
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(p -> productMapper.toDTO(p)).collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> getAllActive(){
         List<Product> products = productRepository.findAllByActiveIsTrue();
         return products.stream().map(p -> productMapper.toDTO(p)).collect(Collectors.toList());
     }
+
 
     public void delete(Integer id){
         productRepository.deleteById(id);

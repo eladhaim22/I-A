@@ -12,13 +12,22 @@
             </div>
             <div class="col-md-3 top-info-cart text-right mt-lg-4">
                 <ul class="cart-inner-info">
-                    <li class="button-log">
-                        <a  sec:authorize="!isAuthenticated()" class="btn-open" href="login">
+                    <li class="button-log" sec:authorize="!isAuthenticated()">
+                        <a   class="btn-open" href="login">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
-                         <span sec:authorize="isAuthenticated()"> Welcome! <strong sec:authentication="name"></strong>
-                                <a href="/logout"><span class="fa fa-sign-out-alt"></span></a>
-                         </span>
+                    </li>
+                    <li>
+                        <div class="dropdown show" sec:authorize="isAuthenticated()">
+                            <div style="padding:5px" class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span th:text="'Bienvenido ' + ${#authentication.getPrincipal().getUsername()}"><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+                            </div>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="/account/perfil">Mis Datos</a>
+                                <a class="dropdown-item" href="/logout">Salir</a>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

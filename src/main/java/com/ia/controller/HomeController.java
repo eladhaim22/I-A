@@ -15,7 +15,7 @@ public class HomeController {
 
     @RequestMapping("")
     public String welcome(Model model) {
-        model.addAttribute("products",productService.getAll());
+        model.addAttribute("products",productService.getAllActive().subList(0,8 ));
         return "home";
     }
 }
