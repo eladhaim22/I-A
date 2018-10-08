@@ -7,22 +7,22 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="reclamos")
-public class Reclamo {
+@Table(name="claims")
+public class Claim {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private  Integer id;
 
-    @Column(name="tipo")
-    private String tipo;
+    @Column(name="type")
+    private String type;
 
     @Column(name="description")
     private String description;
 
-    @Column(name="estado")
-    private String estado;
+    @Column(name="state")
+    private String state;
 
     @Column(name="active")
     private boolean active;
@@ -35,12 +35,12 @@ public class Reclamo {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -51,12 +51,12 @@ public class Reclamo {
         this.description = description;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public boolean isActive() {

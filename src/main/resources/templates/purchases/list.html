@@ -51,7 +51,8 @@
                         <td class="invert" th:text="${purchase.quantity}"/>
                         <td class="invert" th:text="'$' + ${purchase.price}"/>
                         <td class="invert" th:text="'$' + ${purchase.price}*${purchase.quantity}"/>
-                        <td class="invert">Sin reclamos</td>
+                        <td th:if="${#lists.isEmpty(purchase.claims)}" class="invert">Sin Reclamos</td>
+                        <td th:if="${not #lists.isEmpty(purchase.claims)}" th:id="'purchase-' + ${purchase.id}" class="invert view-more">Ver Reclamo</td>
                     </tr>
                     </tbody>
                 </table>
@@ -71,10 +72,10 @@
 <footer th:replace="partial/footer.html"/>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    users = /*[[${users}]]*/ 'default';
+    purchases = /*[[${purchases}]]*/ 'default';
     /*]]>*/
 </script>
 <scripts th:replace="partial/scripts.html"/>
-<script src="/js/user-list.js"></script>
+<script src="/js/purchase-list.js"></script>
 </body>
 </html>

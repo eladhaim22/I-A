@@ -34,7 +34,7 @@ public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
         purchaseDTO.setProductName(model.getProductName());
         purchaseDTO.setPrice(model.getPrice());
         purchaseDTO.setQuantity(model.getQuantity());
-        purchaseDTO.getReclamos().addAll(model.getReclamos().stream().map(r -> reclamoMapper.toDTO(r)).collect(Collectors.toList()));
+        purchaseDTO.getClaims().addAll(model.getClaims().stream().map(r -> reclamoMapper.toDTO(r)).collect(Collectors.toList()));
         return purchaseDTO;
     }
 
@@ -53,7 +53,7 @@ public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
         purchase.setProductName(dto.getProductName());
         purchase.setPrice(dto.getPrice());
         purchase.setQuantity(dto.getQuantity());
-        purchase.setReclamos(dto.getReclamos().stream().map(r -> reclamoMapper.toModel(r)).collect(Collectors.toList()));
+        purchase.setClaims(dto.getClaims().stream().map(r -> reclamoMapper.toModel(r)).collect(Collectors.toList()));
         return purchase;
     }
 }

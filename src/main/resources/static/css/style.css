@@ -2408,4 +2408,7 @@ span.error {
     color:red;
 }
 
+.view-more{
+    cursor: pointer;
+}
 /*-- //responsive media queries --*/

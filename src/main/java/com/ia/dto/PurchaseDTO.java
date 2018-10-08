@@ -1,8 +1,5 @@
 package com.ia.dto;
 
-import com.ia.entity.Reclamo;
-
-import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +12,7 @@ public class PurchaseDTO {
     private String productName;
     private float price;
     private int quantity;
-    private List<ReclamoDTO> reclamos = new ArrayList<>();
+    private List<ClaimDTO> claims = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -73,11 +70,11 @@ public class PurchaseDTO {
         this.quantity = quantity;
     }
 
-    public List<ReclamoDTO> getReclamos() {
-        return reclamos;
+    public List<ClaimDTO> getClaims() {
+        return claims;
     }
 
-    public void setReclamos(List<ReclamoDTO> reclamos) {
-        this.reclamos = reclamos;
+    public void setClaims(List<ClaimDTO> claims) {
+        this.claims = claims;
     }
 }

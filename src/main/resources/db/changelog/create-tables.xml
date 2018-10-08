@@ -112,17 +112,17 @@
             </column>
         </createTable>
 
-        <createTable tableName="reclamos">
+        <createTable tableName="claims">
             <column name="id" type="int" incrementBy="1" autoIncrement="true">
                 <constraints nullable="false" unique="true" primaryKey="true"/>
             </column>
-            <column name="tipo"  type="nvarchar(255)">
+            <column name="type"  type="nvarchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="description"  type="nvarchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="estado"  type="nvarchar(255)">
+            <column name="state"  type="nvarchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="active"  type="boolean">
@@ -155,7 +155,7 @@
                                  constraintName="purchases_product_fk"
                                  referencedTableName="products" referencedColumnNames="id"/>
 
-        <addForeignKeyConstraint baseTableName="reclamos" baseColumnNames="purchase_id"
+        <addForeignKeyConstraint baseTableName="claims" baseColumnNames="purchase_id"
                                  constraintName="purchases_reclamos_fk"
                                  referencedTableName="purchases" referencedColumnNames="id"/>
 

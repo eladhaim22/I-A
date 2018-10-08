@@ -1,5 +1,6 @@
 package com.ia.controller;
 
+import com.ia.dto.ClaimDTO;
 import com.ia.dto.ProductDTO;
 import com.ia.dto.PurchaseDTO;
 import com.ia.entity.Purchase;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/purchase")
@@ -34,6 +36,11 @@ public class PurchaseController {
         try{
             logger.info("get all purchases");
             List<PurchaseDTO> purchases = purchaseService.getAllByUser();
+            purchases = purchases.stream().map(p -> {
+                List<ClaimDTO> claimDTOS = p.getClaims().stream().filter(r -> r.isActive()).collect(Collectors.toList());
+                p.setClaims(claimDTOS);
+                return p;
+            }).collect(Collectors.toList());
             model.addAttribute("purchases",purchases);
             return "purchases/list.html";
         }

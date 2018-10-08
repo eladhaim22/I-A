@@ -2,12 +2,12 @@ package com.ia.dto;
 
 import javax.persistence.*;
 
-public class ReclamoDTO {
+public class ClaimDTO {
 
     private  Integer id;
-    private String tipo;
+    private String type;
     private String description;
-    private String estado;
+    private String state;
     private boolean active;
 
     public Integer getId() {
@@ -18,12 +18,12 @@ public class ReclamoDTO {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getDescription() {
@@ -34,12 +34,12 @@ public class ReclamoDTO {
         this.description = description;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public boolean isActive() {

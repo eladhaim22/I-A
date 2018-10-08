@@ -1,8 +1,5 @@
 package com.ia.entity;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +36,7 @@ public class Purchase {
 
     @OneToMany
     @JoinColumn(name = "purchase_id")
-    private List<Reclamo> reclamos = new ArrayList<>();
+    private List<Claim> claims = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -97,11 +94,11 @@ public class Purchase {
         this.quantity = quantity;
     }
 
-    public List<Reclamo> getReclamos() {
-        return reclamos;
+    public List<Claim> getClaims() {
+        return claims;
     }
 
-    public void setReclamos(List<Reclamo> reclamos) {
-        this.reclamos = reclamos;
+    public void setClaims(List<Claim> claims) {
+        this.claims = claims;
     }
 }
