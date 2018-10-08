@@ -6,6 +6,7 @@ import com.ia.mappers.ProductMapper;
 import com.ia.repository.ProductRepository;
 import com.ia.service.Impl.ProductServiceImpl;
 import com.ia.service.ProductService;
+import com.ia.util.FileUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +44,9 @@ public class ProductServiceTest {
 
 	@MockBean
 	private ProductRepository productRepository;
+
+	@MockBean
+	private FileUtil fileUtil;
 
 	@TestConfiguration
 	static class ProductServiceImplTestContextConfiguration {

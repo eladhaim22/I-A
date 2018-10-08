@@ -33,11 +33,11 @@
                                 <form action="/login" method="post">
                                     <div class="form-group">
                                         <label class="my-2">Email</label>
-                                        <input class="form-control" type="text" name="email" placeholder="" required="true">
+                                        <input class="form-control" type="text" name="email" placeholder="" required="true" oninvalid="this.setCustomValidity('Este campo es obligatorio y debe tener formato de email.')"  oninput="setCustomValidity('')">
                                     </div>
                                     <div class="form-group">
                                         <label>Contraseña</label>
-                                        <input class="form-control" type="password" name="password" placeholder="" required="true">
+                                        <input class="form-control" type="password" name="password" placeholder="" required="true" oninvalid="this.setCustomValidity('Este campo es obligatorio.')"  oninput="setCustomValidity('')">
                                         <span th:if="${param.error}" class="error">El email o contraseña estan incorrectos.</span>
                                     </div>
                                     <input class="form-control" type="submit" value="Submit">

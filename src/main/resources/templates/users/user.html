@@ -36,23 +36,23 @@
                                 <h3 class="tittle-w3layouts text-center my-lg-4 my-4" th:text="${user.id != null ? 'Modificar Usuario' : 'Crear Usuario'}" />
                                 <form class="form-horizontal" action="/admin/user" method="post" th:object="${user}">
                                     <input class="form-control" name="id" type="hidden" th:value=${user.id} placeholder="" required="true">
-                                    <input class="form-control" name="person.id" type="hidden" th:value=${user.person.id} placeholder="" required="true">
+                                    <input class="form-control" name="person.id" type="hidden" th:value=${user.person.id} placeholder="" required="true" >
                                     <div class="row">
                                         <div class="col form-group">
                                                 <label>Nombre</label>
-                                                <input class="form-control" type="text" th:field="*{name}" placeholder="" required="true">
+                                                <input class="form-control" type="text" th:field="*{name}" placeholder="" required="true" oninvalid="this.setCustomValidity('Este campo es obligatorio.')"  oninput="setCustomValidity('')">
                                                 <span  class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
                                         </div>
                                         <div class="col form-group">
                                             <label>Apellido</label>
-                                            <input class="form-control" type="text" th:field="*{lastName}" placeholder="" required="true">
+                                            <input class="form-control" type="text" th:field="*{lastName}" placeholder="" required="true" oninvalid="this.setCustomValidity('Este campo es obligatorio.')"  oninput="setCustomValidity('')">
                                             <span  class="error" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name Error</span>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col form-group">
                                             <label>Email</label>
-                                            <input class="form-control" type="text" th:field="*{email}" placeholder="" required="true" th:readonly="${user.id != null ? true : false}">
+                                            <input class="form-control" type="email" th:field="*{email}" placeholder="" required="true" th:readonly="${user.id != null ? true : false}" oninvalid="this.setCustomValidity('Este campo es obligatorio y debe tener formato de email.')"  oninput="setCustomValidity('')">
                                             <span  class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
                                         </div>
                                     </div>
@@ -73,12 +73,12 @@
                                         <div class="col-md-4 form-group">
                                             <label>DNI</label>
                                             <input class="form-control" type="text" th:field="*{person.dni}" placeholder="" required="true"
-                                                   pattern="[0-9]{8}">
+                                                   pattern="[0-9]{8}" oninvalid="this.setCustomValidity('Este campo es obligatorio y debe tener 8 digitos.')"  oninput="setCustomValidity('')">
                                             <span  class="error" th:if="${#fields.hasErrors('person.dni')}" th:errors="*{person.dni}">dni Error</span>
                                         </div>
                                         <div class="col-md-8 form-group">
                                             <label>Dirección</label>
-                                            <input class="form-control" type="text" th:field="*{person.address}" placeholder="" required="true">
+                                            <input class="form-control" type="text" th:field="*{person.address}" placeholder="" required="true" oninvalid="this.setCustomValidity('Este campo es obligatorio.')"  oninput="setCustomValidity('')">
                                             <span  class="error" th:if="${#fields.hasErrors('person.address')}" th:errors="*{person.address}">address Error</span>
                                         </div>
                                     </div>
@@ -93,7 +93,14 @@
                                             <label>Es Activo?</label>
                                         </div>
                                     </div>
-                                    <input class="form-control" type="submit" value="Guardar">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input class="form-control" type="submit" value="Guardar">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="/admin/user/list"><input class="form-control" type="button" value="Volver"></a>
+                                        </div>
+                                    </div>
                                 </form>
 							</div>
 						</div>
