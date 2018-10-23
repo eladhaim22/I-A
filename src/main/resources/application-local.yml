@@ -8,3 +8,19 @@ spring:
         database: MYSQL
         database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
         show-sql: true
+ftp:
+  address: 127.0.0.1
+  port: 2121
+  user: anonymous
+  password:
+  destination:
+    url: src/main/webapp/csv/test.csv
+  source:
+    url: test.csv
+
+job:
+  fileUrl: csv/test.csv
+
+deposit:
+  hasStockUrl: bla
+  sendPurchaseUrl: bla

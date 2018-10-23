@@ -27,6 +27,10 @@ public class Claim {
     @Column(name="active")
     private boolean active;
 
+    @OneToOne
+    @JoinColumn(name="purchase_id")
+    private Purchase purchase;
+
     public Integer getId() {
         return id;
     }
@@ -65,5 +69,13 @@ public class Claim {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public Purchase getPurchase() {
+        return purchase;
+    }
+
+    public void setPurchase(Purchase purchase) {
+        this.purchase = purchase;
     }
 }

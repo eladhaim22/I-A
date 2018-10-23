@@ -11,5 +11,5 @@
     <include file="changelog/load-users-roles.xml" relativeToChangelogFile="true"/>
     <include file="changelog/load-products.xml" relativeToChangelogFile="true"/>
     <include file="changelog/load-purchase.xml" relativeToChangelogFile="true"/>
-    <include file="changelog/load-claims.xml" relativeToChangelogFile="true"/>
+    <!--include file="changelog/load-claims.xml" relativeToChangelogFile="true"/-->
 </databaseChangeLog>

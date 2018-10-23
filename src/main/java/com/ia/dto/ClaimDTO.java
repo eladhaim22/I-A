@@ -9,6 +9,7 @@ public class ClaimDTO {
     private String description;
     private String state;
     private boolean active;
+    private int purchaseId;
 
     public Integer getId() {
         return id;
@@ -48,5 +49,13 @@ public class ClaimDTO {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public int getPurchaseId() {
+        return purchaseId;
+    }
+
+    public void setPurchaseId(int purchaseId) {
+        this.purchaseId = purchaseId;
     }
 }

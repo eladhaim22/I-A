@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase,Integer> {
     List<Purchase> findAllByUser_Id(Long userId);
+    List<Purchase> findAllByIdIn(List<Integer> purchaseIds);
 }

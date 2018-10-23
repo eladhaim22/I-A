@@ -22,7 +22,7 @@ public class PurchaseMapper implements IMapper<Purchase,PurchaseDTO> {
     private UserRepository userRepository;
 
     @Autowired
-    private ReclamoMapper reclamoMapper;
+    private ClaimMapper reclamoMapper;
 
     @Override
     public PurchaseDTO toDTO(Purchase model) {
