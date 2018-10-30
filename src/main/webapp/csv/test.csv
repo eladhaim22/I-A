@@ -1,2 +1,2 @@
-type;description;state;active;purchaseId
-Reclamo por internet;Mi compra no llego;En processo;true;1
+descripcionProducto;dnicliente;idPedido;idProducto;mailCliente;montoCompra;nombreCliente
+MARTIN Aviator;222222222;6;2;user@user.com;4250.0;user user

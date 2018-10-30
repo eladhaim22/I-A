@@ -5,10 +5,7 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
 import org.springframework.stereotype.Component;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 
 @Component
 public class FtpClient {
@@ -30,9 +27,9 @@ public class FtpClient {
         ftp.login(user, password);
     }
 
-    public void download(String fileName,String destination) throws IOException {
+    public void upload(String fileName,String destination) throws IOException {
         FileOutputStream out = new FileOutputStream(destination);
-        ftp.retrieveFile(fileName, out);
+        ftp.storeFile(destination, new FileInputStream(fileName));
     }
 
     public void close() throws IOException {

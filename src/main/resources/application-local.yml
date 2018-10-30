@@ -13,9 +13,9 @@ ftp:
   port: 2121
   user: anonymous
   password:
-  destination:
-    url: src/main/webapp/csv/test.csv
   source:
+    url: src/main/webapp/csv/test.csv
+  destination:
     url: test.csv
 
 job:

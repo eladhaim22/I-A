@@ -1,7 +1,9 @@
 package com.ia.service.Impl;
 
 import com.ia.entity.Product;
+import com.ia.entity.Purchase;
 import com.ia.entity.User;
+import com.ia.externaldto.ExternalDepositeDTO;
 import com.ia.service.DepositService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,22 +27,10 @@ public class DepositServiceImpl extends DepositService {
         return restTemplate.getForObject(hasStockUrl, boolean.class);
     }
 
-    public void sendPurchase(User user, Product product, int quantity) {
-        WrapperClass wrapperClass = new WrapperClass(user,product ,quantity);
-        HttpEntity<WrapperClass> request = new HttpEntity<>(wrapperClass);
+    public void sendPurchase(Purchase purchase) {
+        ExternalDepositeDTO externalDepositeDTO = this.loadExternal(purchase);
+        HttpEntity<ExternalDepositeDTO> request = new HttpEntity<>(externalDepositeDTO);
         restTemplate.postForEntity(sendPurchaseUrl,request , boolean.class );
-    }
-
-    private static class WrapperClass{
-        private User user;
-        private Product product;
-        private int quantity;
-
-        public WrapperClass(User user, Product product, int quantity) {
-            this.user = user;
-            this.product = product;
-            this.quantity = quantity;
-        }
     }
 
 }

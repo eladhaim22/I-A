@@ -1,34 +1,33 @@
 package com.ia.jobs;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.dataformat.csv.CsvGenerator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.ia.dto.ClaimDTO;
-import com.ia.entity.Claim;
-import com.ia.repository.ClaimRepository;
-import com.ia.service.ClaimService;
+import com.ia.dto.PurchasFTPDTO;
+import com.ia.entity.Purchase;
+import com.ia.service.PurchaseService;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.time.Duration;
-import java.time.Instant;
+
+import java.io.*;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Configuration
@@ -41,7 +40,7 @@ public class ScheduledTasks {
     private FtpClient ftpClient;
 
     @Autowired
-    private ClaimService claimService;
+    private PurchaseService purchaseService;
 
     @Value("${ftp.address}")
     private String ftpAddress;
@@ -67,13 +66,15 @@ public class ScheduledTasks {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    @Scheduled(cron="0 0 12 * * *")
-    public void getAllClamis() throws IOException {
+    @Scheduled(fixedRate = 2000)
+    //@Scheduled(cron="0 0 11 59 * *")
+    public void generateAllPurchase() throws IOException {
         try {
+            Date truncatedDate = DateUtils.truncate(new Date(), Calendar.DATE);
+            List<PurchasFTPDTO> purchases = purchaseService.getAllTodayPurchase(truncatedDate);
+            this.generateCsv(purchases);
             ftpClient.open(ftpAddress,ftpPort ,ftpUser ,ftpPassword );
-            ftpClient.download(sourceUrl,destinationUrl );
-            List<ClaimDTO> claimDTOS = loadObjectList();
-            claimService.updateClaimsFromFTP(claimDTOS);
+            ftpClient.upload(sourceUrl,destinationUrl);
         } catch (IOException e) {
             throw e;
         }finally {
@@ -81,18 +82,30 @@ public class ScheduledTasks {
         }
     }
 
-    public List<ClaimDTO> loadObjectList() {
+    public void generateCsv(List<PurchasFTPDTO> purchases) {
         try {
-            CsvSchema bootstrapSchema = CsvSchema.emptySchema().withColumnSeparator(';').withHeader();
             CsvMapper mapper = new CsvMapper();
-            File file = resourceLoader.getResource(jobFileUrl).getFile();
-            MappingIterator<ClaimDTO> readValues =
-                    mapper.readerFor(ClaimDTO.class).with(bootstrapSchema).readValues(file);
-            return readValues.readAll();
-        } catch (Exception e) {
-            log.error("Error occurred while loading object list from file " , e);
-            return Collections.emptyList();
-        }
+            CsvSchema schema = mapper.schemaFor(PurchasFTPDTO.class);
+            schema = schema.withColumnSeparator(';').withoutQuoteChar().withHeader();
+            ObjectWriter myObjectWriter = mapper.writer(schema);
+            File tempFile = new File(sourceUrl);
+            FileOutputStream tempFileOutputStream = null;
+            tempFileOutputStream = new FileOutputStream(tempFile);
+
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(tempFileOutputStream, 1024);
+            OutputStreamWriter writerOutputStream = new OutputStreamWriter(bufferedOutputStream, "UTF-8");
+            myObjectWriter.writeValue(writerOutputStream, purchases);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (JsonGenerationException e) {
+                e.printStackTrace();
+            } catch (JsonMappingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
 }

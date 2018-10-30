@@ -1,6 +1,7 @@
 package com.ia.service;
 
 import com.ia.entity.Product;
+import com.ia.entity.Purchase;
 import com.ia.entity.User;
 import com.ia.externaldto.ExternalClientDTO;
 import com.ia.externaldto.ExternalDepositeDTO;
@@ -14,11 +15,15 @@ public abstract class DepositService {
     private String storeId;
 
     public abstract boolean hasStock(String sku, int quantity);
-    public abstract void sendPurchase(User user, Product product,int quantity);
+    public abstract void sendPurchase(Purchase purchase) throws Exception;
 
-    protected ExternalDepositeDTO loadExternal(User user, Product product,int quantity){
-        ExternalProductDTO externalProductDTO = new ExternalProductDTO(storeId,product.getSku(),quantity);
-        ExternalClientDTO externalClientDTO = new ExternalClientDTO(user.getName(),user.getLastName(),user.getEmail(),user.getPerson().getAddress());
-        return new ExternalDepositeDTO(externalClientDTO,externalProductDTO);
+    protected ExternalDepositeDTO loadExternal(Purchase purchase){
+        ExternalProductDTO externalProductDTO = new ExternalProductDTO(purchase.getProduct().getSku(),purchase.getQuantity());
+        ExternalClientDTO externalClientDTO =
+                new ExternalClientDTO(purchase.getUser().getName(),
+                        purchase.getUser().getLastName(),
+                        purchase.getUser().getEmail(),
+                        purchase.getUser().getPerson().getAddress());
+        return new ExternalDepositeDTO(externalClientDTO,externalProductDTO,purchase.getId());
     }
 }

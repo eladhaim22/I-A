@@ -1,6 +1,7 @@
 package com.ia.service.Impl;
 
 import com.ia.entity.Product;
+import com.ia.entity.Purchase;
 import com.ia.entity.User;
 import com.ia.externaldto.ExternalDepositeDTO;
 import com.ia.service.DepositService;
@@ -17,8 +18,8 @@ public class DepositServiceDummy extends DepositService {
         return depositeResponse;
     }
 
-    public void sendPurchase(User user, Product product, int quantity) {
-        this.loadExternal(user,product,quantity);
+    public void sendPurchase(Purchase purchase) throws Exception {
+        this.loadExternal(purchase);
     }
 
 }

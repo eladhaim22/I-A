@@ -5,6 +5,7 @@ import com.ia.entity.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,4 +13,5 @@ import java.util.Optional;
 public interface PurchaseRepository extends JpaRepository<Purchase,Integer> {
     List<Purchase> findAllByUser_Id(Long userId);
     List<Purchase> findAllByIdIn(List<Integer> purchaseIds);
+    List<Purchase> findAllByPurchaseDateIsGreaterThanEqual(Date date);
 }
