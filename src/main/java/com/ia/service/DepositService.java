@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 
 
 public abstract class DepositService {
-    @Value("${store.id}")
-    private String storeId;
-
     public abstract boolean hasStock(String sku, int quantity);
     public abstract void sendPurchase(Purchase purchase) throws Exception;
 

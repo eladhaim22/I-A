@@ -5,9 +5,10 @@ logging:
     level:
         org:
             springframework:
-                web: INFO
+                web: DEBUG
 spring:
     jpa:
+        show-sql: true
         hibernate:
             ddl-auto: none
             naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
@@ -21,8 +22,26 @@ spring:
         change-log: classpath:db/liquibase-changelog.xml
     thymeleaf:
         cache: false
+    h2:
+      console:
+        enabled: true
+ftp:
+  address: 192.168.43.47
+  port: 2221
+  user: reclamos
+  password: reclamos
+  source:
+    url: src/main/webapp/csv/test.csv
+  destination:
+    url: test.csv
 
-deposite:
-    response: true
-store:
-    id: 2
+job:
+  fileUrl: csv/test.csv
+
+deposit:
+  hasStockUrl: http://192.168.43.105:3003/getStock/
+  sendPurchaseUrl: http://192.168.43.105:3003/enviarCompra
+
+#deposit:
+  #hasStockUrl: http://192.168.43.73:8080/almacen_g1/json/getStock/
+  #sendPurchaseUrl: http://192.168.43.73:8080/almacen_g1/json/enviarCompra/

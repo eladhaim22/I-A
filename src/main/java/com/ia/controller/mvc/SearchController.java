@@ -1,7 +1,6 @@
-package com.ia.controller;
+package com.ia.controller.mvc;
 
 import com.ia.dto.ProductDTO;
-import com.ia.service.ProductService;
 import com.ia.service.SearchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -57,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 
     public void save(ProductDTO productDTO){
         try {
-            if(!productDTO.getFile().isEmpty()){
+            if(!productDTO.getFile().isEmpty() && !productDTO.getFile().getOriginalFilename().isEmpty()){
                 fileUtil.storeFile(filesFolder + productDTO.getFile().getOriginalFilename(),productDTO.getFile().getBytes());
                 productDTO.setFileName(productDTO.getFile().getOriginalFilename());
             }

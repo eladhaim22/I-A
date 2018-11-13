@@ -2,7 +2,6 @@ $(document).ready(function() {
     function showClaim(purchase) {
         var dialog = $(`<div id="dialog-confirm" class="ui-dialog-content ui-widget-content" title="Reclamo compra #${purchase.id}" +  style="width: auto; min-height: 13px; max-height: none; height: auto;">
                                         <div id="dialog-confirm" >
-                                        <p>${purchase.claims[0].type}</p>
                                          <p>${purchase.claims[0].description}</p>
                                         <p>Estado de reclamo:${purchase.claims[0].state}</p>
                                     </div>`);

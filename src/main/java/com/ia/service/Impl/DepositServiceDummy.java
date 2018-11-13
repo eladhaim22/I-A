@@ -8,10 +8,10 @@ import com.ia.service.DepositService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class DepositServiceDummy extends DepositService {
 
-    @Value("${deposite.response}")
+    @Value("${deposit.response}")
     private boolean depositeResponse;
 
     public boolean hasStock(String sku,int quantity){

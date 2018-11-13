@@ -43,7 +43,9 @@ public class ProductMapper implements IMapper<Product,ProductDTO> {
         product.setSku(dto.getSku());
         product.setActive(dto.isActive());
         product.setPrice(dto.getPrice());
-        product.setFileName(dto.getFileName());
+        if(dto.getFileName() != null){
+            product.setFileName(dto.getFileName());
+        }
         product.setDescription(dto.getDescription());
         return product;
     }

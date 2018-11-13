@@ -23,7 +23,6 @@ public class ClaimMapper implements IMapper<Claim,ClaimDTO> {
         claimDTO.setActive(model.isActive());
         claimDTO.setDescription(model.getDescription());
         claimDTO.setState(model.getState());
-        claimDTO.setType(model.getType());
         claimDTO.setPurchaseId(model.getPurchase().getId());
         return claimDTO;
     }
@@ -41,7 +40,6 @@ public class ClaimMapper implements IMapper<Claim,ClaimDTO> {
         claim.setActive(dto.isActive());
         claim.setDescription(dto.getDescription());
         claim.setState(dto.getState());
-        claim.setType(dto.getType());
         claim.setPurchase(purchaseRepository.getOne(dto.getPurchaseId()));
         return claim;
     }

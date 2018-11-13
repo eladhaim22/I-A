@@ -1,6 +1,5 @@
-package com.ia.controller;
+package com.ia.controller.mvc;
 
-import com.ia.dto.UserDTO;
 import com.ia.entity.User;
 import com.ia.service.UserService;
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;

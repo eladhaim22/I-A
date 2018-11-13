@@ -7,7 +7,7 @@ public class ExternalClientDTO {
     private String name;
     @JsonProperty(value="apellido")
     private String lastName;
-    @JsonProperty(value="mail")
+    @JsonProperty(value="email")
     private String mail;
     @JsonProperty(value="direccion")
     private String address;

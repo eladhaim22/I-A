@@ -47,13 +47,23 @@ $(document).ready(function() {
             url: `/purchase`,
             data: JSON.stringify(postObject),
             success:function(data){
-                console.log('exito');
-                Toastify({
-                    text: 'Tu compra fue hecha exitosamente',
-                    duration: 5000,
-                    close: true,
-                    backgroundColor: 'green'
-                }).showToast();
+                if(data == "true"){
+                    console.log('exito');
+                    Toastify({
+                        text: 'Tu compra fue hecha exitosamente',
+                        duration: 5000,
+                        close: true,
+                        backgroundColor: 'green'
+                    }).showToast();
+                }
+                else{
+                    Toastify({
+                        text: 'No hay suficiente stock del producto solicitado',
+                        duration: 5000,
+                        close: true,
+                        backgroundColor: 'red'
+                    }).showToast();
+                }
             },
             error:function(error){
                 console.log('error');

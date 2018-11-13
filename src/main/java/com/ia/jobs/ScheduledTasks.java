@@ -66,7 +66,7 @@ public class ScheduledTasks {
     @Autowired
     private ResourceLoader resourceLoader;
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedRate = 20000)
     //@Scheduled(cron="0 0 11 59 * *")
     public void generateAllPurchase() throws IOException {
         try {
@@ -86,7 +86,7 @@ public class ScheduledTasks {
         try {
             CsvMapper mapper = new CsvMapper();
             CsvSchema schema = mapper.schemaFor(PurchasFTPDTO.class);
-            schema = schema.withColumnSeparator(';').withoutQuoteChar().withHeader();
+            schema = schema.withColumnSeparator(',').withoutQuoteChar().withoutHeader();
             ObjectWriter myObjectWriter = mapper.writer(schema);
             File tempFile = new File(sourceUrl);
             FileOutputStream tempFileOutputStream = null;

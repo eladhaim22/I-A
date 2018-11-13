@@ -1,14 +1,10 @@
-package com.ia.controller;
+package com.ia.controller.mvc;
 
 import com.ia.dto.ProductDTO;
-import com.ia.dto.UserDTO;
 import com.ia.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -112,18 +108,4 @@ public class ProductController {
             throw e;
         }
     }
-
-    @DeleteMapping("/{id}")
-    private ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
-        try {
-                logger.info("delete products with id {0}", id);
-            productService.delete(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
 }

@@ -1,4 +1,4 @@
-package com.ia.controller;
+package com.ia.controller.mvc;
 
 import com.ia.service.ProductService;
 import com.ia.service.SearchService;

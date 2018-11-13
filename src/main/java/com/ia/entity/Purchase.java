@@ -34,7 +34,7 @@ public class Purchase {
     @Column(name="quantity")
     private int quantity;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchase_id")
     private List<Claim> claims = new ArrayList<>();
 

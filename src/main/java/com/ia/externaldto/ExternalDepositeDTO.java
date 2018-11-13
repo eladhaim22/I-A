@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.criteria.CriteriaBuilder;
 
 public class ExternalDepositeDTO {
-    @JsonProperty(value="Cliente")
+    @JsonProperty(value="cliente")
     private ExternalClientDTO externalClientDTO;
-    @JsonProperty(value="Producto")
+    @JsonProperty(value="producto")
     private ExternalProductDTO externalProductDTO;
 
     @JsonProperty(value="nro_orden")

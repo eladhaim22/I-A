@@ -117,7 +117,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         claim.setState(claimDTO.getEstado());
         purchase.getClaims().stream().forEach(c ->
         c.setActive(false));
-        purchase.getClaims().add(claim );
+        purchase.getClaims().add(claim);
         purchaseRepository.save(purchase);
     }
 }

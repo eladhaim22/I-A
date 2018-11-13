@@ -5,7 +5,6 @@ import javax.persistence.*;
 public class ClaimDTO {
 
     private  Integer id;
-    private String type;
     private String description;
     private String state;
     private boolean active;
@@ -17,14 +16,6 @@ public class ClaimDTO {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getDescription() {
